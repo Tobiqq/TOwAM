@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">BasketballTeamManager</string>
+
+    <string name="Team_Manager">Team Manager</string>
+    <string name="Game_Manager">Game Manager</string>
+    <string name="Settings">Settings</string>
+    <string name="Add_Team">Add Team</string>
+    <string name="Team">Team</string>
+    <string name="Add_Player">Add Player</string>
+<<<<<<< HEAD
+=======
+    <string name="Add_Game">Add Game</string>
+    <string name="Track_Game">Track Game</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Save">Save</string>
+
+    <string-array name="teamleague">
+        <item>Extraklasa</item>
+        <item>1 Liga Mężczyzn</item>
+        <item>2 Liga Mężczyzn</item>
+        <item>3 Liga Mężczyzn</item>
+        <item>Rozgrywki Amatorskie</item>
+    </string-array>
+>>>>>>> 5076573... Second Commit
+</resources>
