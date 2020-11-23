@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "321740565229",
+    "firebase_url": "https://towam-20d59.firebaseio.com",
+    "project_id": "towam-20d59",
+    "storage_bucket": "towam-20d59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321740565229:android:8898b2700d294f7cd43ae4",
+        "android_client_info": {
+          "package_name": "com.example.basketballmanagerv3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321740565229-s6hps00r1iprdq25loogq99i9rgllbp9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.basketballmanagerv3",
+            "certificate_hash": "cc1f8dc4f0fb2ce0d257f72dd33e75669347d85a"
+          }
+        },
+        {
+          "client_id": "321740565229-q4kee5m2l8ikat9bgi4j59egsd3sauvn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIyKDnTISkwUvHK_0Mc6iMOCjtUolYc_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321740565229-q4kee5m2l8ikat9bgi4j59egsd3sauvn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

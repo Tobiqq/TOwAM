@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/layout2"
     tools:context=".Fragment1">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Team Manager"
-        android:textSize="50sp"
-        android:textColor="@color/green"
-        android:layout_centerInParent="true"/>
 
 
     <Button
@@ -30,5 +23,60 @@
         android:text="@string/Add_Team"
         android:textSize="20dp" />
 
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/addTeam"
+        android:layout_marginBottom="-140dp"
+        android:layout_below="@+id/relativeLayout2"
+        android:focusable="true"
+        android:contextClickable="true"
+        android:transcriptMode="alwaysScroll"
+        android:descendantFocusability="blocksDescendants"
+        android:divider="@color/layout"
+        android:dividerHeight="2px">
+        <!--        android:entries="@array/sections" -->
+        ></ListView>
 
+    <LinearLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/layout"
+        android:contextClickable="true"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="30dp">
+
+        <TextView
+            android:id="@+id/FirstText1"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Team Name"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/SecondText1"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Tag"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/ThirdText1"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="League"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+    </LinearLayout>
 </RelativeLayout>

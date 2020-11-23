@@ -7,8 +7,6 @@
     <string name="Add_Team">Add Team</string>
     <string name="Team">Team</string>
     <string name="Add_Player">Add Player</string>
-<<<<<<< HEAD
-=======
     <string name="Add_Game">Add Game</string>
     <string name="Track_Game">Track Game</string>
     <string name="Cancel">Cancel</string>
@@ -21,5 +19,4 @@
         <item>3 Liga Mężczyzn</item>
         <item>Rozgrywki Amatorskie</item>
     </string-array>
->>>>>>> 5076573... Second Commit
 </resources>

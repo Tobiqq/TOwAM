@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="20dp"
-    android:id="@+id/tvLeague"
+    android:id="@+id/tvLeague2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="50dp"
     android:layout_toRightOf="@id/ivLeague"
     android:layout_centerVertical="true"
-    android:textColor="@color/green3"
-    android:textSize="30dp"
-    android:text="--Choose Your League--"
-    android:hint="--Choose Your League--"
-    android:entries="@array/teamleague">
+    android:textSize="30dp">
 </TextView>

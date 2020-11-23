@@ -1,0 +1,46 @@
+<LinearLayout
+    android:id="@+id/relativeLayout1"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:textColor="@color/green"
+    android:background="@color/layout2"
+    android:textSize="30dp"
+    android:contextClickable="true"
+    android:focusable="true"
+    android:textAlignment="center">
+
+    <TextView
+        android:id="@+id/FirstText"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:text="First"
+        android:layout_weight="1"
+        android:textColor="@color/green"
+        android:textSize="30dp"
+        android:gravity="center">
+    </TextView>
+
+    <TextView
+        android:id="@+id/SecondText"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:text="Second"
+        android:layout_weight="1"
+        android:textColor="@color/green"
+        android:textSize="30dp"
+        android:gravity="center"
+        >
+    </TextView>
+
+    <TextView
+        android:id="@+id/ThirdText"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:text="Third"
+        android:layout_weight="1"
+        android:textColor="@color/green"
+        android:textSize="30dp"
+        android:gravity="center">
+    </TextView>
+</LinearLayout>
