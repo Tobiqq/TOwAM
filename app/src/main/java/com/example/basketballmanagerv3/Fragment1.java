@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,12 +44,23 @@ public class Fragment1 extends Fragment {
         getActivity().setTitle("Added Teams");
 
 
-        TeamListView = (ListView)view.findViewById(R.id.listView1);
+        TeamListView = (ListView) view.findViewById(R.id.listView1);
         list = new ArrayList<HashMap<String, String>>();
-        HashMap<String,String> temp = new HashMap<String, String>();
+        HashMap<String, String> temp = new HashMap<String, String>();
 
         final ListViewAdapter adapter = new ListViewAdapter(getActivity(), list);
         TeamListView.setAdapter(adapter);
+
+
+        TeamListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(), i + "position clicked", Toast.LENGTH_SHORT).show();
+                Intent in = new Intent(getActivity(), FourtActivity.class);
+                in.putExtra("team", list.get(i).get(FIRST_COLUMN).toString());
+                startActivity(in);
+            }
+        });
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("teams");
         reference.addValueEventListener(new ValueEventListener() {

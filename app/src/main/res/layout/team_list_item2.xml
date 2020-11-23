@@ -6,8 +6,8 @@
     android:textColor="@color/green"
     android:background="@color/layout2"
     android:textSize="30dp"
-    android:contextClickable="true"
-    android:focusable="true"
+    android:focusable="false"
+    android:descendantFocusability="blocksDescendants"
     android:textAlignment="center">
 
     <TextView
@@ -18,6 +18,7 @@
         android:layout_weight="1"
         android:textColor="@color/green"
         android:textSize="30dp"
+        android:focusableInTouchMode="false"
         android:gravity="center">
     </TextView>
 
@@ -27,6 +28,7 @@
         android:layout_height="100dp"
         android:text="Second"
         android:layout_weight="1"
+        android:focusableInTouchMode="false"
         android:textColor="@color/green"
         android:textSize="30dp"
         android:gravity="center"
@@ -38,6 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:text="Third"
+        android:focusableInTouchMode="false"
         android:layout_weight="1"
         android:textColor="@color/green"
         android:textSize="30dp"

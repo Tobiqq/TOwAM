@@ -1,0 +1,54 @@
+<LinearLayout
+    android:id="@+id/relativeLayout1"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:textColor="@color/green"
+    android:background="@color/layout2"
+    android:textSize="30dp"
+    android:contextClickable="true"
+    android:focusable="true"
+    android:textAlignment="center">
+
+    <TextView
+        android:id="@+id/FirstText"
+        android:layout_width="371dp"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="First"
+        android:textColor="@color/green"
+        android:textSize="30dp"></TextView>
+
+    <TextView
+        android:id="@+id/SecondText"
+        android:layout_width="367dp"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Second"
+        android:textColor="@color/green"
+        android:textSize="30dp"></TextView>
+
+    <TextView
+        android:id="@+id/ThirdText"
+        android:layout_width="121dp"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/green"
+        android:textSize="30dp"></TextView>
+
+    <Button
+        android:id="@+id/trackGame"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginLeft="50dp"
+        android:background="@drawable/rounded_corners"
+        android:text="@string/Track_Game"
+        android:textSize="20dp" />
+</LinearLayout>

@@ -7,14 +7,6 @@
     android:background="@color/layout2"
     tools:context=".Fragment2">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Game"
-        android:textColor="@color/green"
-        android:textSize="50dp" />
-
     <Button
         android:id="@+id/addGame"
         android:layout_width="140dp"
@@ -42,5 +34,63 @@
         android:background="@drawable/rounded_corners"
         android:text="@string/Track_Game"
         android:textSize="20dp" />
+
+    <ListView
+        android:id="@+id/listView2"
+        android:layout_width="match_parent"
+        android:layout_height="826dp"
+        android:layout_above="@id/addGame"
+        android:layout_below="@+id/relativeLayout3"
+        android:layout_marginTop="-6dp"
+        android:layout_marginBottom="-140dp"
+        android:contextClickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:divider="@color/layout"
+        android:dividerHeight="2px"
+        android:focusable="true"
+        android:transcriptMode="alwaysScroll">
+        <!--        android:entries="@array/sections" -->
+        ></ListView>
+
+    <LinearLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/layout"
+        android:contextClickable="true"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="30dp">
+
+        <TextView
+            android:id="@+id/FirstText2"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Host Team Name"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/SecondText2"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Guest Team Name"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/ThirdText2"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Settings"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+    </LinearLayout>
 
 </RelativeLayout>

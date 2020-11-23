@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class ThirdActivity extends AppCompatActivity {
+public class  ThirdActivity extends AppCompatActivity {
 
     private Spinner spinner;
     private Spinner spinner2;
