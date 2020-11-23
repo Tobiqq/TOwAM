@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +48,19 @@ public class Fragment2 extends Fragment {
 
         final ListViewAdapterButton adapter = new ListViewAdapterButton(getActivity(), list);
         GameListView.setAdapter(adapter);
+
+        GameListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(), i + "position clicked", Toast.LENGTH_SHORT).show();
+                Intent in = new Intent(getActivity(), SeventhActivity.class);
+                in.putExtra("team1", list.get(i).get(FIRST_COLUMN).toString());
+                in.putExtra("team2", list.get(i).get(SECOND_COLUMN).toString());
+                in.putExtra("position", i);
+                startActivity(in);
+            }
+        });
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("games");
         reference.addValueEventListener(new ValueEventListener() {

@@ -35,7 +35,7 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teamspopup);
-        Activity activity;
+        final Activity activity;
         this.setTitle("Add Team");
 
 

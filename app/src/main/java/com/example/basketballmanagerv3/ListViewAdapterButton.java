@@ -1,10 +1,12 @@
 package com.example.basketballmanagerv3;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +54,7 @@ public class ListViewAdapterButton extends BaseAdapter {
     private class ViewHolder{
         TextView txtFirst;
         TextView txtSecond;
+        Button trackGame;
     }
 
     @Override
@@ -64,6 +67,18 @@ public class ListViewAdapterButton extends BaseAdapter {
 
             holder.txtFirst = (TextView) convertView.findViewById(R.id.FirstText);
             holder.txtSecond = (TextView) convertView.findViewById(R.id.SecondText);
+            holder.trackGame = (Button) convertView.findViewById(R.id.trackGame);
+            holder.trackGame.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(activity, "Track your game!", Toast.LENGTH_SHORT).show();
+                    Intent in = new Intent(activity, SeventhActivity.class);
+                    in.putExtra("team1", list.get(position).get(FIRST_COLUMN).toString());
+                    in.putExtra("team2", list.get(position).get(SECOND_COLUMN).toString());
+                    in.putExtra("position", position);
+                    activity.startActivity(in);
+                }
+            });
 
             convertView.setTag(holder);
         }
@@ -74,13 +89,6 @@ public class ListViewAdapterButton extends BaseAdapter {
 
             holder.txtFirst.setText(map.get(FIRST_COLUMN));
             holder.txtSecond.setText(map.get(SECOND_COLUMN));
-
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(activity, position + "position clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
 
             return convertView;
         }

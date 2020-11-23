@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         bottomnav.setOnNavigationItemSelectedListener(navListener);
 
         this.setTitle("Basketball Team Manager");
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

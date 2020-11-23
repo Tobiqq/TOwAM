@@ -92,7 +92,10 @@ public class Fragment1 extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+            public void onRestart()
+            {
 
+            }
         });
 
 
@@ -133,6 +136,8 @@ public class Fragment1 extends Fragment {
             }
         });*/
 
+
+
         Button btn = (Button) view.findViewById(R.id.addTeam);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,5 +147,8 @@ public class Fragment1 extends Fragment {
             }
         });
         return view;
+
+
     }
+
 }

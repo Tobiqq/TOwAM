@@ -29,7 +29,7 @@ public class FourtActivity extends AppCompatActivity {
 
 
     private Activity activity;
-    ListView TeamListView;
+    ListView PlayerListView;
     private ArrayList<HashMap<String, String>> list2;
 
 
@@ -41,7 +41,7 @@ public class FourtActivity extends AppCompatActivity {
         final Activity activity;
         this.setTitle("Players");
 
-        TeamListView = (ListView) findViewById(R.id.listView3);
+        PlayerListView = (ListView) findViewById(R.id.listView3);
         list2 = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> temp = new HashMap<String, String>();
 
@@ -79,7 +79,7 @@ public class FourtActivity extends AppCompatActivity {
                     temp.put(THIRD_COLUMN, position);
                     list2.add(temp);
                     final ListViewAdapter adapter = new ListViewAdapter(FourtActivity.this, list2);
-                    TeamListView.setAdapter(adapter);
+                    PlayerListView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
             }
