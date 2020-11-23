@@ -2,7 +2,8 @@ package com.example.basketballmanagerv3;
 
 public class CollectHelperClass {
 
-    private String teamname, teamtag, league, hostname, guestname;
+    private String teamname, teamtag, league, hostname, guestname, playername, position;
+    private int playernumber;
 
 
 /*    public void Writeteam(String team){
@@ -29,6 +30,36 @@ public class CollectHelperClass {
     public CollectHelperClass(String hostname, String guestname) {
         this.hostname = hostname;
         this.guestname = guestname;
+    }
+
+    public CollectHelperClass(String playername, int playernumber, String position) {
+        this.playername = playername;
+        this.playernumber = playernumber;
+        this.position = position;
+    }
+
+    public int getPlayerNumber() {
+        return playernumber;
+    }
+
+    public void setPlayerNumber(int playernumber) {
+        this.playernumber = playernumber;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getPlayername() {
+        return playername;
+    }
+
+    public void setPlayername(String playername) {
+        this.playername = playername;
     }
 
     public String getTeamname() {

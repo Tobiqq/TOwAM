@@ -7,39 +7,13 @@
     android:background="@color/layout2"
     tools:context=".Fragment2">
 
-    <Button
-        android:id="@+id/addGame"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="1080dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/rounded_corners"
-        android:text="@string/Add_Game"
-        android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/gamesended"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/rounded_corners"
-        android:text="Games Ended"
-        android:textSize="20dp" />
+
 
     <ListView
         android:id="@+id/listView2"
         android:layout_width="match_parent"
         android:layout_height="826dp"
-        android:layout_above="@id/addGame"
         android:layout_below="@+id/relativeLayout3"
         android:layout_marginTop="-6dp"
         android:layout_marginBottom="-140dp"

@@ -88,12 +88,54 @@
             android:textSize="30dp"></TextView>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/relativeLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/relativeLayout4"
+        android:background="@color/layout"
+        android:contextClickable="true"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="30dp">
+
+        <TextView
+            android:id="@+id/FirstText4"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Player Name"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/SecondText4"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Player Number"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/ThirdText4"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Position"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+    </LinearLayout>
+
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/listView3"
         android:layout_width="match_parent"
         android:layout_height="661dp"
         android:layout_above="@id/addPlayer"
-        android:layout_below="@+id/relativeLayout4"
+        android:layout_below="@+id/relativeLayout5"
         android:layout_marginTop="-1dp"
         android:layout_marginBottom="-140dp"
         android:contextClickable="true"

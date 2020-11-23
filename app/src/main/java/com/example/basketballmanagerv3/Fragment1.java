@@ -35,6 +35,8 @@ public class Fragment1 extends Fragment {
     ListView TeamListView;
 
     private ArrayList<HashMap<String, String>> list;
+    public String Id;
+    ArrayList<String> IdList = new ArrayList<>();
 
 
     @Nullable
@@ -58,15 +60,20 @@ public class Fragment1 extends Fragment {
                 Toast.makeText(getActivity(), i + "position clicked", Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(getActivity(), FourtActivity.class);
                 in.putExtra("team", list.get(i).get(FIRST_COLUMN).toString());
+                in.putExtra("position", i);
+                in.putExtra("id", IdList.get(i).toString());
                 startActivity(in);
             }
         });
+
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("teams");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    IdList.add(snapshot.getKey());
                     String team = snapshot.child("teamname").getValue(String.class);
                     String tag = snapshot.child("teamtag").getValue(String.class);
                     String league = snapshot.child("league").getValue(String.class);

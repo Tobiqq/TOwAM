@@ -72,11 +72,21 @@ public class Fragment2 extends Fragment {
         });
 
         Button btn = (Button) view.findViewById(R.id.addGame);
+        Button scbtn = (Button) view.findViewById(R.id.gamesended);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getActivity(), ThirdActivity.class);
                 startActivity(in);
+            }
+        });
+
+        scbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent secin = new Intent(getActivity(), SixthActivity.class);
+                startActivity(secin);
             }
         });
         return view;
