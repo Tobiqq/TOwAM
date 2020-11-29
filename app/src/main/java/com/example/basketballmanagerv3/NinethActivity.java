@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class EighthActivity extends AppCompatActivity {
+public class NinethActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView recyclerView2;
@@ -36,6 +36,8 @@ public class EighthActivity extends AppCompatActivity {
     Activity activity;
     private ArrayList<String> listplayer1;
     private ArrayList<String> listplayer2;
+    private ArrayList<String> listplayer1temp;
+    private ArrayList<String> listplayer2temp;
     String[] tab;
     String team1key;
     String team2key;
@@ -50,8 +52,8 @@ public class EighthActivity extends AppCompatActivity {
         final String teamname1 = in.getStringExtra("team1");
         final String teamname2 = in.getStringExtra("team2");
         final Integer position = getIntent().getExtras().getInt("position");
-        listplayer1 = in.getStringArrayListExtra("team1players");
-        listplayer2 = in.getStringArrayListExtra("team2players");
+        listplayer1temp = in.getStringArrayListExtra("team1players");
+        listplayer2temp = in.getStringArrayListExtra("team2players");
 
         listplayer1 = new ArrayList<String>();
         listplayer2 = new ArrayList<String>();
@@ -64,7 +66,7 @@ public class EighthActivity extends AppCompatActivity {
 
 
         Query reference = FirebaseDatabase.getInstance().getReference("teams").orderByChild("teamname").equalTo(teamname1);
-        recyclerAdapter = new RecyclerAdapter(listplayer1);
+        recyclerAdapter = new RecyclerAdapter(listplayer1temp);
         final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
 
@@ -79,8 +81,6 @@ public class EighthActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             String playern = snapshot.child("playername").getValue(String.class);
-                            listplayer1.add(playern);
-                            Log.i("errplay", playern);
 
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
                             recyclerView.setAdapter(recyclerAdapter);
@@ -98,7 +98,7 @@ public class EighthActivity extends AppCompatActivity {
         });
 
         Query reference3 = FirebaseDatabase.getInstance().getReference("teams").orderByChild("teamname").equalTo(teamname2);
-        recyclerAdapter2 = new RecyclerAdapter(listplayer2);
+        recyclerAdapter2 = new RecyclerAdapter(listplayer2temp);
         final ItemTouchHelper itemTouchHelper2 = new ItemTouchHelper(simpleCallback);
         final DividerItemDecoration dividerItemDecoration2 = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
 
@@ -113,8 +113,6 @@ public class EighthActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             String playern = snapshot.child("playername").getValue(String.class);
-                            listplayer2.add(playern);
-                            Log.i("errplay", playern);
 
 
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -144,8 +142,8 @@ public class EighthActivity extends AppCompatActivity {
                 in.putExtra("team1", teamname1);
                 in.putExtra("team2", teamname2);
                 in.putExtra("position", position);
-                in.putExtra("team1players", listplayer1);
-                in.putExtra("team2players", listplayer2);
+                in.putExtra("team1players", listplayer1temp);
+                in.putExtra("team2players", listplayer2temp);
                 startActivity(in);
             }
         });
@@ -157,7 +155,8 @@ public class EighthActivity extends AppCompatActivity {
 
             int fromPosition = viewHolder.getAdapterPosition();
             int toPosition = target.getAdapterPosition();
-            Collections.swap(listplayer1, fromPosition, toPosition);
+            Collections.swap(listplayer1temp, fromPosition, toPosition);
+            Collections.swap(listplayer2temp, fromPosition, toPosition);
             recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
             return false;
         }

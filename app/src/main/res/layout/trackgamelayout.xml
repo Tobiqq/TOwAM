@@ -176,7 +176,7 @@
             android:layout_marginBottom="40dp"
             android:layout_toEndOf="@+id/player5"
             android:background="@drawable/rounded_corners"
-            android:text="PChange"
+            android:text="Change"
             android:textSize="20dp" />
     </RelativeLayout>
 
@@ -267,7 +267,7 @@
             android:layout_marginBottom="40dp"
             android:layout_toEndOf="@+id/player11"
             android:background="@drawable/rounded_corners"
-            android:text="Change 2"
+            android:text="Change"
             android:textSize="20dp" />
     </RelativeLayout>
 

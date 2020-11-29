@@ -4,23 +4,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class SeventhActivity extends AppCompatActivity {
 
@@ -35,6 +32,10 @@ public class SeventhActivity extends AppCompatActivity {
     String team1key;
     String team2key;
     Button[] tabButtons = new Button[12];
+    private ArrayList<String> listplayer1;
+    private ArrayList<String> listplayer2;
+    List<Player> listsecond = new ArrayList<>();
+    List<Player> listfirst = new ArrayList<>();
 
 
     @Override
@@ -49,17 +50,16 @@ public class SeventhActivity extends AppCompatActivity {
         tabButtons[2] = (Button) findViewById(R.id.player3);
         tabButtons[3] = (Button) findViewById(R.id.player4);
         tabButtons[4] = (Button) findViewById(R.id.player5);
-        tabButtons[5] = (Button) findViewById(R.id.player6);
-        tabButtons[6] = (Button) findViewById(R.id.player7);
-        tabButtons[7] = (Button) findViewById(R.id.player8);
-        tabButtons[8] = (Button) findViewById(R.id.player9);
-        tabButtons[9] = (Button) findViewById(R.id.player10);
-        tabButtons[10] = (Button) findViewById(R.id.player11);
-        tabButtons[11] = (Button) findViewById(R.id.player12);
+        tabButtons[5] = (Button) findViewById(R.id.player7);
+        tabButtons[6] = (Button) findViewById(R.id.player8);
+        tabButtons[7] = (Button) findViewById(R.id.player9);
+        tabButtons[8] = (Button) findViewById(R.id.player10);
+        tabButtons[9] = (Button) findViewById(R.id.player11);
+
 
         Player1ListView = (ListView) findViewById(R.id.listView4);
         Player2ListView = (ListView) findViewById(R.id.listView5);
-        tab = new String[12];
+        tab = new String[10];
         list1 = new ArrayList<String>();
         HashMap<String, String> temp = new HashMap<String, String>();
         list2 = new ArrayList<HashMap<String, String>>();
@@ -67,9 +67,9 @@ public class SeventhActivity extends AppCompatActivity {
 
 
         Intent in = getIntent();
-        String teamname1 = in.getStringExtra("team1");
-        String teamname2 = in.getStringExtra("team2");
-        Integer position = getIntent().getExtras().getInt("position");
+        final String teamname1 = in.getStringExtra("team1");
+        final String teamname2 = in.getStringExtra("team2");
+        final Integer position = getIntent().getExtras().getInt("position");
         TextView team1 = (TextView) findViewById(R.id.home);
         TextView team2 = (TextView) findViewById(R.id.guest);
         team1.setText(teamname1);
@@ -77,53 +77,82 @@ public class SeventhActivity extends AppCompatActivity {
 
 
 
+        listplayer1 = new ArrayList<String>();
+        listplayer2 = new ArrayList<String>();
+        listplayer1 = in.getStringArrayListExtra("team1players");
+        listplayer2 = in.getStringArrayListExtra("team2players");
 
-        Query reference = FirebaseDatabase.getInstance().getReference("teams").orderByChild("teamname").equalTo(teamname1);
 
-        reference.addListenerForSingleValueEvent(new ValueEventListener(){
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    team1key = childSnapshot.getKey();
-                    Log.i("err", team1key);
-                }
+        for (int i = 0; i < listplayer1.size(); i++){
+            Player player = new Player(listplayer1.get(i));
+            listfirst.add(player);
+        }
+
+        for (int i = 0; i < listplayer2.size(); i++){
+            Player player = new Player(listplayer2.get(i));
+            listsecond.add(player);
+        }
+
+
+
+        int j = 0;
+        for (int i = 0; i < 5; i++){
+            if(j > listplayer1.size()-1){
+
+            }else{
+                tab[i] = listplayer1.get(i);
             }
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            tabButtons[i].setText(tab[i]);
+            j++;
+        }
+
+        int k = 0;
+        for (int z = 5; z < 10; z++){
+            if(k > listplayer2.size()-1){
+
+            }else{
+                tab[z] = listplayer2.get(z-5);
+            }
+            tabButtons[z].setText(tab[z]);
+            k++;
+        }
+
+
+        Button btn = (Button) findViewById(R.id.player6);
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(), NinethActivity.class);
+                in.putExtra("team1", teamname1);
+                in.putExtra("team2", teamname2);
+                in.putExtra("position", position);
+                in.putExtra("team1players", listplayer1);
+                in.putExtra("team2players", listplayer2);
+                startActivity(in);
             }
         });
 
-        Query reference2 = FirebaseDatabase.getInstance().getReference("teams").orderByChild("teamname").equalTo(teamname2);
-
-        reference2.addListenerForSingleValueEvent(new ValueEventListener(){
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    team2key = childSnapshot.getKey();
-                    Log.i("err", team2key);
-                }
-                Query reference3 = FirebaseDatabase.getInstance().getReference("teams").child(team2key).child("players");
-                reference3.addValueEventListener(new ValueEventListener() {
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String playern = snapshot.child("playername").getValue(String.class);
-                            list1.add(playern);
-                            Log.i("errplay", playern);
-                        }
-                        int j = 0;
-                        for (int i = 0; i < tab.length; i++){
-                            if(j > list1.size()-1){
-                                tab[i] = "elo";
-                            }else{
-                                tab[i] = list1.get(i);
-                            }
-                            tabButtons[i].setText(tab[i]);
-                            j++;
-                        }
-                }
-
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+        Button btn2 = (Button) findViewById(R.id.player12);
+        btn2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(), NinethActivity.class);
+                in.putExtra("team1", teamname1);
+                in.putExtra("team2", teamname2);
+                in.putExtra("position", position);
+                in.putExtra("team1players", listplayer1);
+                in.putExtra("team2players", listplayer2);
+                startActivity(in);
             }
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+        });
+
+        Button bReb = (Button) findViewById(R.id.Rebound);
+        bReb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listfirst.get(0).addrebound();
+                int temp = listfirst.get(0).getreb();
+                Log.i("errplay", String.valueOf(temp));
             }
         });
     }
