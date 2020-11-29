@@ -72,7 +72,7 @@ public class ListViewAdapterButton extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(activity, "Track your game!", Toast.LENGTH_SHORT).show();
-                    Intent in = new Intent(activity, SeventhActivity.class);
+                    Intent in = new Intent(activity, EighthActivity.class);
                     in.putExtra("team1", list.get(position).get(FIRST_COLUMN).toString());
                     in.putExtra("team2", list.get(position).get(SECOND_COLUMN).toString());
                     in.putExtra("position", position);
