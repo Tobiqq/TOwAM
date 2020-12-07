@@ -19,8 +19,9 @@ public class Player {
         this.playername = playername;
     }
 
-    public void name(String playername){
+    public Player setname(String playername){
         this.playername = playername;
+        return null;
     }
 
     public void addrebound(){
@@ -53,5 +54,17 @@ public class Player {
 
     public int getreb(){
         return reb;
+    }
+    public int getasis(){
+        return asis;
+    }
+    public int getsteal(){
+        return steal;
+    }
+    public int get2points(){
+        return points2;
+    }
+    public int get3points(){
+        return points3;
     }
 }

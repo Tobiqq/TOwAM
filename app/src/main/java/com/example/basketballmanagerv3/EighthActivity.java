@@ -41,6 +41,7 @@ public class EighthActivity extends AppCompatActivity {
     String team2key;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,6 +147,8 @@ public class EighthActivity extends AppCompatActivity {
                 in.putExtra("position", position);
                 in.putExtra("team1players", listplayer1);
                 in.putExtra("team2players", listplayer2);
+                in.putExtra("team1key", team1key);
+                in.putExtra("team2key", team2key);
                 startActivity(in);
             }
         });

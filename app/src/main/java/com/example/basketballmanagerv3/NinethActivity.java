@@ -63,6 +63,10 @@ public class NinethActivity extends AppCompatActivity {
         team1.setText(teamname1);
         team2.setText(teamname2);
 
+        ArrayList<Player> listsecond1 = new ArrayList<>();
+        ArrayList<Player> listfirst1 = new ArrayList<>();
+
+
 
 
         Query reference = FirebaseDatabase.getInstance().getReference("teams").orderByChild("teamname").equalTo(teamname1);
