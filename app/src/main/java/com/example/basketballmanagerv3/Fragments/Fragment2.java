@@ -1,6 +1,5 @@
-package com.example.basketballmanagerv3;
+package com.example.basketballmanagerv3.Fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +8,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.basketballmanagerv3.AddGameActivity;
+import com.example.basketballmanagerv3.Helpers.ListViewAdapterButton;
+import com.example.basketballmanagerv3.R;
+import com.example.basketballmanagerv3.SixthActivity;
+import com.example.basketballmanagerv3.TrackGameActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,15 +27,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.example.basketballmanagerv3.Constants.FIRST_COLUMN;
-import static com.example.basketballmanagerv3.Constants.SECOND_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.FIRST_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.SECOND_COLUMN;
 
 
 public class Fragment2 extends Fragment {
-    private static final String TAG = "Fragment2";
-    private Activity activity;
-    ListView GameListView;
 
+    ListView GameListView;
     private ArrayList<HashMap<String, String>> list;
 
     @Nullable
@@ -42,9 +43,8 @@ public class Fragment2 extends Fragment {
         getActivity().setTitle("Added Games");
 
 
-        GameListView = (ListView)view.findViewById(R.id.listView2);
-        list = new ArrayList<HashMap<String, String>>();
-        HashMap<String,String> temp = new HashMap<String, String>();
+        GameListView = view.findViewById(R.id.listView2);
+        list = new ArrayList<>();
 
         final ListViewAdapterButton adapter = new ListViewAdapterButton(getActivity(), list);
         GameListView.setAdapter(adapter);
@@ -52,10 +52,9 @@ public class Fragment2 extends Fragment {
         GameListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), i + "position clicked", Toast.LENGTH_SHORT).show();
-                Intent in = new Intent(getActivity(), SeventhActivity.class);
-                in.putExtra("team1", list.get(i).get(FIRST_COLUMN).toString());
-                in.putExtra("team2", list.get(i).get(SECOND_COLUMN).toString());
+                Intent in = new Intent(getActivity(), TrackGameActivity.class);
+                in.putExtra("team1", list.get(i).get(FIRST_COLUMN));
+                in.putExtra("team2", list.get(i).get(SECOND_COLUMN));
                 in.putExtra("position", i);
                 startActivity(in);
             }
@@ -86,18 +85,18 @@ public class Fragment2 extends Fragment {
 
         });
 
-        Button btn = (Button) view.findViewById(R.id.addGame);
-        Button scbtn = (Button) view.findViewById(R.id.gamesended);
+        Button addGameButton= view.findViewById(R.id.addGame);
+        Button gamesEndedButton = view.findViewById(R.id.gamesended);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        addGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getActivity(), ThirdActivity.class);
+                Intent in = new Intent(getActivity(), AddGameActivity.class);
                 startActivity(in);
             }
         });
 
-        scbtn.setOnClickListener(new View.OnClickListener() {
+        gamesEndedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent secin = new Intent(getActivity(), SixthActivity.class);

@@ -1,4 +1,4 @@
-package com.example.basketballmanagerv3;
+package com.example.basketballmanagerv3.Helpers;
 
 public class Player {
     private String teamname, teamtag, league, playername, position;

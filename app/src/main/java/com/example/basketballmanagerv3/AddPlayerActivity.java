@@ -1,8 +1,8 @@
 package com.example.basketballmanagerv3;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +16,18 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.basketballmanagerv3.Helpers.CollectHelperClass;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SecondActivity extends AppCompatActivity {
+public class AddPlayerActivity extends AppCompatActivity {
 
-    private Spinner spinner;
-    EditText teamname, teamshortcut, teamleague;
+
+    Spinner spinner;
+    EditText playername, playernumber;
     Button Savebutton, Cancelbutton;
     FirebaseDatabase database;
     DatabaseReference refernce;
@@ -34,13 +36,12 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.teamspopup);
-        final Activity activity;
-        this.setTitle("Add Team");
+        setContentView(R.layout.players_popup);
+        this.setTitle("Add Player");
 
 
-        spinner = findViewById(R.id.teamleague);
-        String[] value = {"--Choose Your League--","1 Liga Mężczyzn","2 Liga Mężczyzn","3 Liga Mężczyzn","Rozgrywki Amatorskie"};
+        spinner = findViewById(R.id.playerposition);
+        String[] value = {"--Choose Player Posiotion--","PG","SG","SF","PF","C"};
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(value));
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.style_spinner,R.id.tvLeague2, arrayList){
             @SuppressLint("ResourceAsColor")
@@ -82,29 +83,30 @@ public class SecondActivity extends AppCompatActivity {
             }
         };
         arrayAdapter.setDropDownViewResource(R.layout.style_spinner);
+
         spinner.setAdapter(arrayAdapter);
 
-/*        Spinner spinner = findViewById(R.id.teamleague);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.teamleague, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);*/
-        teamname = findViewById(R.id.teamname);
-        teamshortcut = findViewById(R.id.teamshortcut);
 
-        Savebutton = findViewById(R.id.Savebutton);
-        Cancelbutton = findViewById(R.id.Cancelbutton);
+        playername = findViewById(R.id.playername);
+        playernumber = findViewById(R.id.playernumber);
 
+        Savebutton = findViewById(R.id.Savebutton3);
+        Cancelbutton = findViewById(R.id.Cancelbutton3);
+
+        Intent in = getIntent();
+        final String position = getIntent().getExtras().getString("position");
+        final String Id = in.getStringExtra("id");
 
         Savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 database = FirebaseDatabase.getInstance();
-                refernce = database.getReference("teams");
-                String team = teamname.getText().toString();
-                String tag = teamshortcut.getText().toString();
+                refernce = database.getReference("teams/"+ Id +"/players");
+                String name = playername.getText().toString();
+                String number = playernumber.getText().toString();
+                int number2 = Integer.parseInt(number);
                 String league = spinner.getSelectedItem().toString();
-                CollectHelperClass collect = new CollectHelperClass(team,tag,league);
+                CollectHelperClass collect = new CollectHelperClass(name,number2,league);
                 refernce.push().setValue(collect);
                 Context context = getApplicationContext();
                 Toast.makeText(context, "Data added succesfully!!", Toast.LENGTH_SHORT).show();
@@ -121,5 +123,3 @@ public class SecondActivity extends AppCompatActivity {
     }
 
 }
-
-

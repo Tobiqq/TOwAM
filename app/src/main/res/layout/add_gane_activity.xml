@@ -5,25 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/layout2"
-    tools:context=".SecondActivity"
+    tools:context=".AddGameActivity"
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/newteamsicon"
+        android:id="@+id/newteamsicon2"
         android:layout_width="wrap_content"
         android:layout_height="297dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="500dp"
+        android:layout_marginStart="502dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="500dp"
+        android:layout_marginEnd="498dp"
         android:layout_marginBottom="490dp"
-        android:background="@drawable/ic_baseline_sports_basketball_24" />
+        android:background="@drawable/ic_baseline_games_24" />
 
-    <EditText
-        android:id="@+id/teamname"
+<!--    <EditText
+        android:id="@+id/hostteamname"
         android:layout_width="800dp"
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
@@ -33,13 +33,13 @@
         android:layout_marginTop="41dp"
         android:layout_marginEnd="230dp"
         android:layout_marginBottom="380dp"
-        android:hint="Team Name"
+        android:hint="Host Team Name"
         android:textColor="@color/green"
         android:textColorHint="@color/green3"
         android:textSize="30dp" />
 
     <EditText
-        android:id="@+id/teamshortcut"
+        android:id="@+id/guestteamname"
         android:layout_width="800dp"
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
@@ -49,11 +49,46 @@
         android:layout_marginTop="41dp"
         android:layout_marginEnd="230dp"
         android:layout_marginBottom="270dp"
-        android:hint="Team Shortcut"
+        android:hint="Guest Team Name"
         android:textColor="@color/green"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="@color/green3"
-        android:textSize="30dp" />
+        android:textSize="30dp" />-->
+
+    <Spinner
+        android:id="@+id/hostteamname"
+        android:layout_width="800dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="240dp"
+        android:layout_marginBottom="380dp"
+        android:popupBackground="@color/layout2"
+        android:background="@color/layout2"
+        android:outlineSpotShadowColor="@color/green"
+        android:outlineAmbientShadowColor="@color/green"
+        android:hint="--Choose Team--"
+        />
+
+    <Spinner
+        android:id="@+id/guestteamname"
+        android:layout_width="800dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="240dp"
+        android:layout_marginBottom="270dp"
+        android:popupBackground="@color/layout2"
+        android:background="@color/layout2"
+        android:outlineSpotShadowColor="@color/green"
+        android:outlineAmbientShadowColor="@color/green"
+        />
 
     <!--     <EditText
            android:id="@+id/teamleague"
@@ -91,23 +126,6 @@
         android:background="@drawable/rounded_corners"
         android:text="@string/Cancel"
         android:textSize="30dp" />
-
-    <Spinner
-        android:id="@+id/teamleague"
-        android:layout_width="800dp"
-        android:layout_height="80dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="230dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="240dp"
-        android:layout_marginBottom="160dp"
-        android:popupBackground="@color/layout2"
-        android:background="@color/layout2"
-        android:outlineSpotShadowColor="@color/green"
-        android:outlineAmbientShadowColor="@color/green"
-        />
 
 
 </RelativeLayout>

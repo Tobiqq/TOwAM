@@ -4,7 +4,6 @@
     android:id="@+id/tvLeague2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_toRightOf="@id/ivLeague"
     android:layout_centerVertical="true"
     android:textSize="30dp">
 </TextView>

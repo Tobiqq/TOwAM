@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.basketballmanagerv3.Helpers.Player;
+import com.example.basketballmanagerv3.Helpers.RecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -46,7 +48,7 @@ public class NinethActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_eigth);
+        setContentView(R.layout.choose_first_five);
 
         Intent in = getIntent();
         final String teamname1 = in.getStringExtra("team1");
@@ -142,12 +144,13 @@ public class NinethActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Track your game!", Toast.LENGTH_SHORT).show();
-                Intent in = new Intent(getApplicationContext(), SeventhActivity.class);
+                Intent in = new Intent(getApplicationContext(), TrackGameActivity.class);
                 in.putExtra("team1", teamname1);
                 in.putExtra("team2", teamname2);
                 in.putExtra("position", position);
                 in.putExtra("team1players", listplayer1temp);
                 in.putExtra("team2players", listplayer2temp);
+
                 startActivity(in);
             }
         });

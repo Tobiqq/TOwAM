@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/layout2"
-    tools:context=".Fragment1">
+    tools:context=".Fragments.Fragment1">
 
 
     <Button
@@ -24,7 +24,7 @@
         android:textSize="20dp" />
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/teamListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/addTeam"

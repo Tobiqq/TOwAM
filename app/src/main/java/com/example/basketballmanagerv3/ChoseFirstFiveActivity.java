@@ -1,6 +1,5 @@
 package com.example.basketballmanagerv3;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.basketballmanagerv3.Helpers.RecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -24,19 +24,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class EighthActivity extends AppCompatActivity {
+public class ChoseFirstFiveActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView recyclerView2;
     RecyclerAdapter recyclerAdapter;
     RecyclerAdapter recyclerAdapter2;
 
-
-    FirebaseDatabase database;
-    Activity activity;
     private ArrayList<String> listplayer1;
     private ArrayList<String> listplayer2;
-    String[] tab;
+
     String team1key;
     String team2key;
 
@@ -45,20 +42,19 @@ public class EighthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_eigth);
+        setContentView(R.layout.choose_first_five);
 
         Intent in = getIntent();
         final String teamname1 = in.getStringExtra("team1");
         final String teamname2 = in.getStringExtra("team2");
         final Integer position = getIntent().getExtras().getInt("position");
-        listplayer1 = in.getStringArrayListExtra("team1players");
-        listplayer2 = in.getStringArrayListExtra("team2players");
 
-        listplayer1 = new ArrayList<String>();
-        listplayer2 = new ArrayList<String>();
 
-        TextView team1 = (TextView) findViewById(R.id.home);
-        TextView team2 = (TextView) findViewById(R.id.guest);
+        listplayer1 = new ArrayList<>();
+        listplayer2 = new ArrayList<>();
+
+        TextView team1 = findViewById(R.id.home);
+        TextView team2 = findViewById(R.id.guest);
         team1.setText(teamname1);
         team2.setText(teamname2);
 
@@ -136,12 +132,12 @@ public class EighthActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView2 = findViewById(R.id.recyclerView2);
 
-        Button btn = (Button) findViewById(R.id.trackGame2);
+        Button btn = findViewById(R.id.trackGame2);
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Track your game!", Toast.LENGTH_SHORT).show();
-                Intent in = new Intent(getApplicationContext(), SeventhActivity.class);
+                Intent in = new Intent(getApplicationContext(), TrackGameActivity.class);
                 in.putExtra("team1", teamname1);
                 in.putExtra("team2", teamname2);
                 in.putExtra("position", position);

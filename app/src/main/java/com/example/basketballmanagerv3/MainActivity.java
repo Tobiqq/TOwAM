@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.basketballmanagerv3.Fragments.Fragment1;
+import com.example.basketballmanagerv3.Fragments.Fragment2;
+import com.example.basketballmanagerv3.Fragments.Fragment3;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

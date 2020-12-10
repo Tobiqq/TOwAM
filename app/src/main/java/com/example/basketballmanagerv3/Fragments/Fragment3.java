@@ -1,4 +1,4 @@
-package com.example.basketballmanagerv3;
+package com.example.basketballmanagerv3.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.basketballmanagerv3.R;
 
 public class Fragment3 extends Fragment {
     private static final String TAG = "Fragment3";

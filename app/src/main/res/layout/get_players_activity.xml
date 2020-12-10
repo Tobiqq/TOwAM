@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/layout2"
-    tools:context=".Fragment1">
+    tools:context=".Fragments.Fragment1">
 
 
     <Button
@@ -56,7 +56,7 @@
         android:textSize="30dp">
 
         <TextView
-            android:id="@+id/FirstText2"
+            android:id="@+id/team_name"
             android:layout_width="1dp"
             android:layout_height="80dp"
             android:layout_weight="1"

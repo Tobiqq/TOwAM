@@ -1,15 +1,12 @@
 package com.example.basketballmanagerv3;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.basketballmanagerv3.Helpers.CollectHelperClass;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,39 +23,33 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 
-public class  ThirdActivity extends AppCompatActivity {
+public class AddGameActivity extends AppCompatActivity {
 
-    private Spinner spinner;
-    private Spinner spinner2;
+    private Spinner spinner, spinner2;
+
     Button Savebutton, Cancelbutton;
+
     FirebaseDatabase database;
     DatabaseReference refernce;
-    EditText hostname, guestname;
 
-    private ArrayList<HashMap<String, String>> list;
-    Activity activity;
-    ListView TeamListView;
+    final ArrayList<String> list = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gamespopup);
-        Activity activity;
+        setContentView(R.layout.add_gane_activity);
         this.setTitle("Add Game");
 
-        Savebutton = findViewById(R.id.Savebutton2);
-        Cancelbutton = findViewById(R.id.Cancelbutton2);
+        Savebutton = findViewById(R.id.Savebutton);
+        Cancelbutton = findViewById(R.id.Cancelbutton);
 
         spinner = findViewById(R.id.hostteamname);
         spinner2 = findViewById(R.id.guestteamname);
 
 
-        final ArrayList<String> list = new ArrayList<>();
         list.add("--Choose Team--");
-        final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.team_list_item2, list);
+        final ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.team_list_item2, list);
         DatabaseReference referance = FirebaseDatabase.getInstance().getReference().child("teams");
         referance.addValueEventListener(new ValueEventListener() {
             @Override
@@ -74,10 +66,7 @@ public class  ThirdActivity extends AppCompatActivity {
             }
         });
 
-        String[] value = {"Tutaj lista teamów z bazy"};
-        String[] value2 = {"Druga lista teamó z bazy"};
-        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(value));
-        ArrayList<String> arrayList2 = new ArrayList<>(Arrays.asList(value));
+
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.style_spinner,R.id.tvLeague2, list){
             @SuppressLint("ResourceAsColor")
             @Override

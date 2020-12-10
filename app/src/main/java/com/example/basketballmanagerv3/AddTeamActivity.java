@@ -1,9 +1,7 @@
 package com.example.basketballmanagerv3;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +15,17 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.basketballmanagerv3.Helpers.CollectHelperClass;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FifthActivity extends AppCompatActivity {
+public class AddTeamActivity extends AppCompatActivity {
 
-
-    Spinner spinner;
-    EditText playername, playernumber;
+    private Spinner spinner;
+    EditText teamname, teamshortcut, teamleague;
     Button Savebutton, Cancelbutton;
     FirebaseDatabase database;
     DatabaseReference refernce;
@@ -36,13 +34,12 @@ public class FifthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.playerspopup);
-        Activity activity;
-        this.setTitle("Add Player");
+        setContentView(R.layout.teams_popup);
+        this.setTitle("Add Team");
 
 
-        spinner = findViewById(R.id.playerposition);
-        String[] value = {"--Choose Player Posiotion--","PG","SG","SF","PF","C"};
+        spinner = findViewById(R.id.teamleague);
+        String[] value = {"--Choose Your League--","1 Liga Mężczyzn","2 Liga Mężczyzn","3 Liga Mężczyzn","Rozgrywki Amatorskie"};
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(value));
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.style_spinner,R.id.tvLeague2, arrayList){
             @SuppressLint("ResourceAsColor")
@@ -84,30 +81,24 @@ public class FifthActivity extends AppCompatActivity {
             }
         };
         arrayAdapter.setDropDownViewResource(R.layout.style_spinner);
-
         spinner.setAdapter(arrayAdapter);
 
+        teamname = findViewById(R.id.teamname);
+        teamshortcut = findViewById(R.id.teamshortcut);
 
-        playername = findViewById(R.id.playername);
-        playernumber = findViewById(R.id.playernumber);
+        Savebutton = findViewById(R.id.Savebutton);
+        Cancelbutton = findViewById(R.id.Cancelbutton);
 
-        Savebutton = findViewById(R.id.Savebutton3);
-        Cancelbutton = findViewById(R.id.Cancelbutton3);
-
-        Intent in = getIntent();
-        final String position = getIntent().getExtras().getString("position");
-        final String Id = in.getStringExtra("id");
 
         Savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 database = FirebaseDatabase.getInstance();
-                refernce = database.getReference("teams/"+ Id +"/players");
-                String name = playername.getText().toString();
-                String number = playernumber.getText().toString();
-                int number2 = Integer.parseInt(number);
+                refernce = database.getReference("teams");
+                String team = teamname.getText().toString();
+                String tag = teamshortcut.getText().toString();
                 String league = spinner.getSelectedItem().toString();
-                CollectHelperClass collect = new CollectHelperClass(name,number2,league);
+                CollectHelperClass collect = new CollectHelperClass(team,tag,league);
                 refernce.push().setValue(collect);
                 Context context = getApplicationContext();
                 Toast.makeText(context, "Data added succesfully!!", Toast.LENGTH_SHORT).show();
@@ -124,3 +115,5 @@ public class FifthActivity extends AppCompatActivity {
     }
 
 }
+
+

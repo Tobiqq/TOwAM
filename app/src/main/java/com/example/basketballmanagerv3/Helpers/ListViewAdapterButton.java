@@ -1,4 +1,4 @@
-package com.example.basketballmanagerv3;
+package com.example.basketballmanagerv3.Helpers;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,15 +8,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
+
+import com.example.basketballmanagerv3.ChoseFirstFiveActivity;
+import com.example.basketballmanagerv3.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.example.basketballmanagerv3.Constants.FIRST_COLUMN;
-import static com.example.basketballmanagerv3.Constants.SECOND_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.FIRST_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.SECOND_COLUMN;
 
 
 public class ListViewAdapterButton extends BaseAdapter {
@@ -71,10 +73,9 @@ public class ListViewAdapterButton extends BaseAdapter {
             holder.trackGame.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(activity, "Track your game!", Toast.LENGTH_SHORT).show();
-                    Intent in = new Intent(activity, EighthActivity.class);
-                    in.putExtra("team1", list.get(position).get(FIRST_COLUMN).toString());
-                    in.putExtra("team2", list.get(position).get(SECOND_COLUMN).toString());
+                    Intent in = new Intent(activity, ChoseFirstFiveActivity.class);
+                    in.putExtra("team1", list.get(position).get(FIRST_COLUMN));
+                    in.putExtra("team2", list.get(position).get(SECOND_COLUMN));
                     in.putExtra("position", position);
                     activity.startActivity(in);
                 }

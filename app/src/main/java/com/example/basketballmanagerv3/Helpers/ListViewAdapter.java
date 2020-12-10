@@ -1,4 +1,4 @@
-package com.example.basketballmanagerv3;
+package com.example.basketballmanagerv3.Helpers;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,12 +9,14 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.basketballmanagerv3.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.example.basketballmanagerv3.Constants.FIRST_COLUMN;
-import static com.example.basketballmanagerv3.Constants.SECOND_COLUMN;
-import static com.example.basketballmanagerv3.Constants.THIRD_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.FIRST_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.SECOND_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.THIRD_COLUMN;
 
 
 public class ListViewAdapter extends BaseAdapter {
@@ -63,9 +65,9 @@ public class ListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.team_list_item2, null);
             holder = new ViewHolder();
 
-            holder.txtFirst = (TextView) convertView.findViewById(R.id.FirstText);
-            holder.txtSecond = (TextView) convertView.findViewById(R.id.SecondText);
-            holder.txtThird = (TextView) convertView.findViewById(R.id.ThirdText);
+            holder.txtFirst = convertView.findViewById(R.id.FirstText);
+            holder.txtSecond = convertView.findViewById(R.id.SecondText);
+            holder.txtThird = convertView.findViewById(R.id.ThirdText);
 
             convertView.setTag(holder);
         }
@@ -77,13 +79,6 @@ public class ListViewAdapter extends BaseAdapter {
             holder.txtFirst.setText(map.get(FIRST_COLUMN));
             holder.txtSecond.setText(map.get(SECOND_COLUMN));
             holder.txtThird.setText(map.get(THIRD_COLUMN));
-
-/*        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(activity, position + "position clicked", Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
             return convertView;
         }

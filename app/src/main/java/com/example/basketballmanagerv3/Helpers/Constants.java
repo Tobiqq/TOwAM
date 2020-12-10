@@ -1,4 +1,4 @@
-package com.example.basketballmanagerv3;
+package com.example.basketballmanagerv3.Helpers;
 
 public class Constants {
     public static final String FIRST_COLUMN = "First";

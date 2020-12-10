@@ -1,6 +1,5 @@
 package com.example.basketballmanagerv3;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,32 +7,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.basketballmanagerv3.Helpers.Player;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class SeventhActivity extends AppCompatActivity {
+public class TrackGameActivity extends AppCompatActivity {
 
-    DatabaseReference refernce;
-    private Spinner spinner;
-    FirebaseDatabase database;
-    private Activity activity;
+
     ListView Player1ListView;
     ListView Player2ListView;
-    private ArrayList<String> list1;
     String[] tab;
-    private ArrayList<HashMap<String, String>> list2;
-    String team1key;
-    String team2key;
+
     Button[] tabButtons = new Button[12];
     private ArrayList<String> listplayer1;
     private ArrayList<String> listplayer2;
@@ -41,31 +31,23 @@ public class SeventhActivity extends AppCompatActivity {
     List<Player> listfirst = new ArrayList<>();
     List<Button> tabButtons2 = new ArrayList<>();
 
-    final Player[] players1 = new Player[12];
-    Player[] players2 = new Player[12];
-    Player players = new Player();
-
-    String player1key;
-    String player2key;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.trackgamelayout);
-        Activity activity;
+        setContentView(R.layout.track_game);
         this.setTitle("Track Game!");
 
-        tabButtons[0] = (Button) findViewById(R.id.player1);
-        tabButtons[1] = (Button) findViewById(R.id.player2);
-        tabButtons[2] = (Button) findViewById(R.id.player3);
-        tabButtons[3] = (Button) findViewById(R.id.player4);
-        tabButtons[4] = (Button) findViewById(R.id.player5);
-        tabButtons[5] = (Button) findViewById(R.id.player7);
-        tabButtons[6] = (Button) findViewById(R.id.player8);
-        tabButtons[7] = (Button) findViewById(R.id.player9);
-        tabButtons[8] = (Button) findViewById(R.id.player10);
-        tabButtons[9] = (Button) findViewById(R.id.player11);
+        tabButtons[0] = findViewById(R.id.player1);
+        tabButtons[1] = findViewById(R.id.player2);
+        tabButtons[2] = findViewById(R.id.player3);
+        tabButtons[3] = findViewById(R.id.player4);
+        tabButtons[4] = findViewById(R.id.player5);
+        tabButtons[5] = findViewById(R.id.player7);
+        tabButtons[6] = findViewById(R.id.player8);
+        tabButtons[7] = findViewById(R.id.player9);
+        tabButtons[8] = findViewById(R.id.player10);
+        tabButtons[9] = findViewById(R.id.player11);
 
         tabButtons2.add(tabButtons[0]);
         tabButtons2.add(tabButtons[1]);
@@ -79,13 +61,11 @@ public class SeventhActivity extends AppCompatActivity {
         tabButtons2.add(tabButtons[9]);
 
 
-        Player1ListView = (ListView) findViewById(R.id.listView4);
-        Player2ListView = (ListView) findViewById(R.id.listView5);
+        Player1ListView = findViewById(R.id.listView4);
+        Player2ListView = findViewById(R.id.listView5);
         tab = new String[10];
-        list1 = new ArrayList<String>();
-        HashMap<String, String> temp = new HashMap<String, String>();
-        list2 = new ArrayList<HashMap<String, String>>();
-        HashMap<String, String> temp2 = new HashMap<String, String>();
+
+
 
 
         Intent in = getIntent();
@@ -94,13 +74,13 @@ public class SeventhActivity extends AppCompatActivity {
         final String team1key = in.getStringExtra("team1key");
         final String team2key = in.getStringExtra("team2key");
         final Integer position = getIntent().getExtras().getInt("position");
-        TextView team1 = (TextView) findViewById(R.id.home);
-        TextView team2 = (TextView) findViewById(R.id.guest);
+        TextView team1 = findViewById(R.id.home);
+        TextView team2 = findViewById(R.id.guest);
         team1.setText(teamname1);
         team2.setText(teamname2);
 
-        listplayer1 = new ArrayList<String>();
-        listplayer2 = new ArrayList<String>();
+        listplayer1 = new ArrayList<>();
+        listplayer2 = new ArrayList<>();
         listplayer1 = in.getStringArrayListExtra("team1players");
         listplayer2 = in.getStringArrayListExtra("team2players");
 
@@ -116,8 +96,6 @@ public class SeventhActivity extends AppCompatActivity {
             listsecond.add(player);
         }
 
-
-
         int j = 0;
         for (int i = 0; i < 5; i++){
             if(j > listplayer1.size()-1){
@@ -128,6 +106,7 @@ public class SeventhActivity extends AppCompatActivity {
             tabButtons[i].setText(tab[i]);
             j++;
         }
+
 
         int k = 0;
         for (int z = 5; z < 10; z++){
@@ -312,8 +291,8 @@ public class SeventhActivity extends AppCompatActivity {
             }
         });
 
-        Button btn = (Button) findViewById(R.id.player6);
-        btn.setOnClickListener(new View.OnClickListener(){
+        Button change1 = findViewById(R.id.player6);
+        change1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), NinethActivity.class);
@@ -328,8 +307,8 @@ public class SeventhActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
-        Button btn2 = (Button) findViewById(R.id.player12);
-        btn2.setOnClickListener(new View.OnClickListener(){
+        Button change2 = findViewById(R.id.player12);
+        change2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), NinethActivity.class);
@@ -342,10 +321,11 @@ public class SeventhActivity extends AppCompatActivity {
                 in.putExtra("listsecond2", String.valueOf(listsecond));
                 startActivity(in);
             }
+
         });
 
 
-        Button bReb = (Button) findViewById(R.id.Rebound);
+        Button bReb = findViewById(R.id.Rebound);
         bReb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -355,14 +335,17 @@ public class SeventhActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getText()){
                                 listfirst.get(j).addrebound();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getreb()));
+/*                                final int pp = j;
 
-                                /*String path = "teams/"+team1key+"/players/";
+                                String path = "teams/"+team1key+"/players/";
                                 Query reference = FirebaseDatabase.getInstance().getReference(path).orderByChild("playername").equalTo(listfirst.get(j).getname());
-                                reference.addValueEventListener(new ValueEventListener(){
+                                Query reference2 = FirebaseDatabase.getInstance().getReference("teams").child(team1key).child("players");
+                                reference.addListenerForSingleValueEvent(new ValueEventListener(){
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                                            player1key = childSnapshot.getKey();
-                                            Log.i("err", player1key);
+                                            String playern = dataSnapshot.child("playername").getValue(String.class);
+                                            if(playern == listfirst.get(pp).getname()){
+                                                player1key = dataSnapshot.getKey();
+
                                         }
                                     }
                                     @Override
@@ -370,6 +353,9 @@ public class SeventhActivity extends AppCompatActivity {
 
                                     }
                                 });
+
+
+
                                 database = FirebaseDatabase.getInstance();
                                 refernce = database.getReference("teams/"+ team1key +"/players/"+ player1key+"/rebound");
                                 String name = listfirst.get(j).getname();
@@ -382,6 +368,7 @@ public class SeventhActivity extends AppCompatActivity {
                                 Toast.makeText(context, "Data added succesfully!!", Toast.LENGTH_SHORT).show();*/
                             }
                         }
+
                         for (int k = 0; k < listsecond.size(); k++){
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getText()){
                                 listsecond.get(k).addrebound();
@@ -395,7 +382,7 @@ public class SeventhActivity extends AppCompatActivity {
 
 
 
-        Button bSteal = (Button) findViewById(R.id.Steal);
+        Button bSteal = findViewById(R.id.Steal);
         bSteal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -418,7 +405,7 @@ public class SeventhActivity extends AppCompatActivity {
             }
         });
 
-        Button bAsis = (Button) findViewById(R.id.Asist);
+        Button bAsis = findViewById(R.id.Asist);
         bAsis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -441,7 +428,7 @@ public class SeventhActivity extends AppCompatActivity {
             }
         });
 
-        Button b2points = (Button) findViewById(R.id.Points2);
+        Button b2points = findViewById(R.id.Points2);
         b2points.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -464,7 +451,7 @@ public class SeventhActivity extends AppCompatActivity {
             }
         });
 
-        Button b3points = (Button) findViewById(R.id.Points3);
+        Button b3points = findViewById(R.id.Points3);
         b3points.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -486,6 +473,7 @@ public class SeventhActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }
 
