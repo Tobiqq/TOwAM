@@ -71,8 +71,6 @@ public class TrackGameActivity extends AppCompatActivity {
         Intent in = getIntent();
         final String teamname1 = in.getStringExtra("team1");
         final String teamname2 = in.getStringExtra("team2");
-        final String team1key = in.getStringExtra("team1key");
-        final String team2key = in.getStringExtra("team2key");
         final Integer position = getIntent().getExtras().getInt("position");
         TextView team1 = findViewById(R.id.home);
         TextView team2 = findViewById(R.id.guest);

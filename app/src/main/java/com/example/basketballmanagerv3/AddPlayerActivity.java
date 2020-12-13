@@ -16,10 +16,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.basketballmanagerv3.Helpers.CollectHelperClass;
+import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -97,17 +100,31 @@ public class AddPlayerActivity extends AppCompatActivity {
         final String position = getIntent().getExtras().getString("position");
         final String Id = in.getStringExtra("id");
 
+        final ConnectionsClass conect = new ConnectionsClass();
+
         Savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                database = FirebaseDatabase.getInstance();
-                refernce = database.getReference("teams/"+ Id +"/players");
                 String name = playername.getText().toString();
                 String number = playernumber.getText().toString();
                 int number2 = Integer.parseInt(number);
-                String league = spinner.getSelectedItem().toString();
-                CollectHelperClass collect = new CollectHelperClass(name,number2,league);
-                refernce.push().setValue(collect);
+                String pos = spinner.getSelectedItem().toString();
+                if(conect.CONN() != null){
+                    Statement statement = null;
+                    try {
+                        statement = conect.CONN().createStatement();
+                        ResultSet idteam = statement.executeQuery("SELECT COUNT (id_player) AS total FROM Players");
+                        int idplayercount = 0;
+                        while(idteam.next()){
+                            idplayercount = idteam.getInt("total");
+                            idplayercount += 1;
+                        }
+                        statement.executeUpdate("SET IDENTITY_INSERT Players ON");
+                        ResultSet result2 = statement.executeQuery("INSERT INTO Players (id_player, id_team, player_name, position, number) VALUES('"+idplayercount+"','"+Integer.parseInt(Id)+"','" +name+"','"+pos+"','"+number2+"')");
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
                 Context context = getApplicationContext();
                 Toast.makeText(context, "Data added succesfully!!", Toast.LENGTH_SHORT).show();
                 finish();

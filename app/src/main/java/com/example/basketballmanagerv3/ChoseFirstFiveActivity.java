@@ -2,7 +2,6 @@ package com.example.basketballmanagerv3;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,13 +13,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
 import com.example.basketballmanagerv3.Helpers.RecyclerAdapter;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -33,11 +31,6 @@ public class ChoseFirstFiveActivity extends AppCompatActivity {
 
     private ArrayList<String> listplayer1;
     private ArrayList<String> listplayer2;
-
-    String team1key;
-    String team2key;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,77 +53,49 @@ public class ChoseFirstFiveActivity extends AppCompatActivity {
 
 
 
-        Query reference = FirebaseDatabase.getInstance().getReference("teams").orderByChild("teamname").equalTo(teamname1);
+        final ConnectionsClass conect = new ConnectionsClass();
+        if(conect.CONN() != null){
+            Statement statement = null;
+            Statement statement2 = null;
+            try {
+                statement = conect.CONN().createStatement();
+                statement2 = conect.CONN().createStatement();
+                ResultSet result = statement.executeQuery("SELECT player_name FROM Players WHERE id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname1+"')");
+                while (result.next()) {
+                    String temp = result.getString(1);
+                    listplayer1.add(temp);
+                }
+                ResultSet result2 = statement2.executeQuery("SELECT player_name FROM Players WHERE id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname2+"')");
+                while (result2.next()) {
+                    String temp2 = result2.getString(1);
+                    listplayer2.add(temp2);
+                }
+            }
+            catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
         recyclerAdapter = new RecyclerAdapter(listplayer1);
         final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
 
-        reference.addListenerForSingleValueEvent(new ValueEventListener(){
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    team1key = childSnapshot.getKey();
-                    Log.i("err", team1key);
-                }
-                Query reference2 = FirebaseDatabase.getInstance().getReference("teams").child(team1key).child("players");
-                reference2.addValueEventListener(new ValueEventListener() {
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String playern = snapshot.child("playername").getValue(String.class);
-                            listplayer1.add(playern);
-                            Log.i("errplay", playern);
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                            recyclerView.setAdapter(recyclerAdapter);
-                            recyclerView.addItemDecoration(dividerItemDecoration);
-                            itemTouchHelper.attachToRecyclerView(recyclerView);
-                        }
-                    }
-
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
-            }
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-
-        Query reference3 = FirebaseDatabase.getInstance().getReference("teams").orderByChild("teamname").equalTo(teamname2);
         recyclerAdapter2 = new RecyclerAdapter(listplayer2);
         final ItemTouchHelper itemTouchHelper2 = new ItemTouchHelper(simpleCallback);
         final DividerItemDecoration dividerItemDecoration2 = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
 
-        reference3.addListenerForSingleValueEvent(new ValueEventListener(){
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    team2key = childSnapshot.getKey();
-                    Log.i("err", team2key);
-                }
-                Query reference4 = FirebaseDatabase.getInstance().getReference("teams").child(team2key).child("players");
-                reference4.addValueEventListener(new ValueEventListener() {
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String playern = snapshot.child("playername").getValue(String.class);
-                            listplayer2.add(playern);
-                            Log.i("errplay", playern);
-
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                            recyclerView2.setAdapter(recyclerAdapter2);
-                            recyclerView2.addItemDecoration(dividerItemDecoration2);
-                            itemTouchHelper2.attachToRecyclerView(recyclerView2);
-                        }
-                    }
-
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
-            }
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView2 = findViewById(R.id.recyclerView2);
+
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        recyclerView2.setAdapter(recyclerAdapter2);
+        recyclerView2.addItemDecoration(dividerItemDecoration2);
+        itemTouchHelper2.attachToRecyclerView(recyclerView2);
+
+
 
         Button btn = findViewById(R.id.trackGame2);
         btn.setOnClickListener(new View.OnClickListener(){
@@ -143,8 +108,6 @@ public class ChoseFirstFiveActivity extends AppCompatActivity {
                 in.putExtra("position", position);
                 in.putExtra("team1players", listplayer1);
                 in.putExtra("team2players", listplayer2);
-                in.putExtra("team1key", team1key);
-                in.putExtra("team2key", team2key);
                 startActivity(in);
             }
         });

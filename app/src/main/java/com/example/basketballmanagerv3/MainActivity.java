@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
         bottomnav.setOnNavigationItemSelectedListener(navListener);
 
         this.setTitle("Basketball Team Manager");
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             Fragment selectedFragment = null;
+
 
             switch(menuItem.getItemId()) {
                 case R.id.team_manager:

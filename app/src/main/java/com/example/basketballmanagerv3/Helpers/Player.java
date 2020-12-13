@@ -25,6 +25,22 @@ public class Player {
     }
 
     public void addrebound(){
+/*        final ConnectionsClass conect = new ConnectionsClass();
+        if(conect.CONN() != null){
+            Statement statement = null;
+            try {
+                statement = conect.CONN().createStatement();
+                ResultSet temp = statement.executeQuery("SELECT Rebounds_off AS total FROM Match_stats WHERE id_player =(SELECT id_player FROM Players WHERE playername =')"+playername+"'");
+                int temp2 = 0;
+                while(temp.next()){
+                    temp2 = temp.getInt("total");
+                    temp2 += 1;
+                }
+                ResultSet result = statement.executeQuery("INSERT INTO Match_stats (Rebounds_off) VALUES ('"+temp2+"'");
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }*/
         reb += 1;
     }
 

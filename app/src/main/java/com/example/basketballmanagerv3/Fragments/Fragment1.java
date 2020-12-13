@@ -1,6 +1,8 @@
 package com.example.basketballmanagerv3.Fragments;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +13,18 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.basketballmanagerv3.AddTeamActivity;
 import com.example.basketballmanagerv3.GetPlayersActivity;
+import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
 import com.example.basketballmanagerv3.Helpers.ListViewAdapter;
 import com.example.basketballmanagerv3.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,12 +32,12 @@ import static com.example.basketballmanagerv3.Helpers.Constants.FIRST_COLUMN;
 import static com.example.basketballmanagerv3.Helpers.Constants.SECOND_COLUMN;
 import static com.example.basketballmanagerv3.Helpers.Constants.THIRD_COLUMN;
 
-
 public class Fragment1 extends Fragment {
 
     ListView TeamListView;
     private ArrayList<HashMap<String, String>> list;
     ArrayList<String> IdList = new ArrayList<>();
+
 
 
     @Nullable
@@ -45,11 +47,43 @@ public class Fragment1 extends Fragment {
         getActivity().setTitle("Added Teams");
 
 
+        Fragment1.this.onResume();
+
         TeamListView = view.findViewById(R.id.teamListView);
         list = new ArrayList<>();
-
         final ListViewAdapter adapter = new ListViewAdapter(getActivity(), list);
         TeamListView.setAdapter(adapter);
+
+
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
+
+        final ConnectionsClass conect = new ConnectionsClass();
+        String team;
+        String tag;
+        String league;
+        if(conect.CONN() != null){
+            Statement statement = null;
+            try {
+                statement = conect.CONN().createStatement();
+                ResultSet result = statement.executeQuery("SELECT * FROM Teams");
+                while(result.next()){
+                    IdList.add(result.getString("id_team"));
+                    team = result.getString("teamname");
+                    tag = result.getString("tag");
+                    league = result.getString("league");
+                    HashMap<String, String> temp = new HashMap<>();
+                    temp.put(FIRST_COLUMN, team);
+                    temp.put(SECOND_COLUMN, tag);
+                    temp.put(THIRD_COLUMN, league);
+                    list.add(temp);
+                    final ListViewAdapter adapter2 = new ListViewAdapter(getActivity(), list);
+                    TeamListView.setAdapter(adapter2);
+                    adapter2.notifyDataSetChanged();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
 
 
         TeamListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -64,7 +98,7 @@ public class Fragment1 extends Fragment {
         });
 
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("teams");
+/*        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("teams");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -88,7 +122,7 @@ public class Fragment1 extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
         Button btn = view.findViewById(R.id.addTeam);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -99,8 +133,6 @@ public class Fragment1 extends Fragment {
             }
         });
         return view;
-
-
     }
 
 }

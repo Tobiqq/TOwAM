@@ -11,17 +11,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.basketballmanagerv3.Helpers.CollectHelperClass;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class AddGameActivity extends AppCompatActivity {
@@ -47,8 +46,24 @@ public class AddGameActivity extends AppCompatActivity {
         spinner = findViewById(R.id.hostteamname);
         spinner2 = findViewById(R.id.guestteamname);
 
-
         list.add("--Choose Team--");
+
+        final ConnectionsClass conect = new ConnectionsClass();
+        if(conect.CONN() != null){
+            Statement statement = null;
+            try {
+                statement = conect.CONN().createStatement();
+                ResultSet teamnameres = statement.executeQuery("SELECT teamname FROM Teams");
+                while(teamnameres.next()){
+                    String temp = teamnameres.getString("teamname");
+                    list.add(temp);
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+/*        list.add("--Choose Team--");
         final ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.team_list_item2, list);
         DatabaseReference referance = FirebaseDatabase.getInstance().getReference().child("teams");
         referance.addValueEventListener(new ValueEventListener() {
@@ -64,7 +79,7 @@ public class AddGameActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.style_spinner,R.id.tvLeague2, list){
@@ -156,12 +171,34 @@ public class AddGameActivity extends AppCompatActivity {
         Savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                database = FirebaseDatabase.getInstance();
-                refernce = database.getReference("games");
                 String hostname = spinner.getSelectedItem().toString();
                 String guestname = spinner2.getSelectedItem().toString();
-                CollectHelperClass collect = new CollectHelperClass(hostname, guestname);
-                refernce.push().setValue(collect);
+                if(conect.CONN() != null){
+                    Statement statement = null;
+                    try {
+                        statement = conect.CONN().createStatement();
+                        ResultSet idgame = statement.executeQuery("SELECT COUNT (id_game) AS total FROM Games");
+                        int idgamecount = 0;
+                        int temp1 = 0;
+                        int temp2 = 0;
+                        while(idgame.next()){
+                            idgamecount = idgame.getInt("total");
+                            idgamecount += 1;
+                        }
+                        ResultSet hostnameid = statement.executeQuery("SELECT id_team FROM Teams WHERE teamname='"+hostname+"'");
+                        while(hostnameid.next()){
+                            temp1 = Integer.parseInt(hostnameid.getObject(1).toString());
+                        }
+                        ResultSet guestnameid = statement.executeQuery("SELECT id_team FROM Teams WHERE teamname='"+guestname+"'");
+                        while(guestnameid.next()){
+                            temp2 = Integer.parseInt(guestnameid.getObject(1).toString());
+                        }
+                        statement.executeUpdate("SET IDENTITY_INSERT Games ON");
+                        ResultSet result = statement.executeQuery("INSERT INTO Games (id_game, id_team_home, id_team_guest, game_state) VALUES"+"('" +idgamecount+ "'," + "'" +temp1+ "'," + "'" +temp2+"'," + "1)");
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
                 Context context = getApplicationContext();
                 Toast.makeText(context, "Data added succesfully!", Toast.LENGTH_SHORT).show();
                 finish();
