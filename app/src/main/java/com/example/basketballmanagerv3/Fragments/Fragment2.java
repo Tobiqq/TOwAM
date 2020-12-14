@@ -102,30 +102,6 @@ public class Fragment2 extends Fragment {
         });
 
 
-/*        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("games");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String team1 = snapshot.child("hostName").getValue(String.class);
-                    String team2 = snapshot.child("guestName").getValue(String.class);
-                    HashMap<String, String> temp = new HashMap<String, String>();
-                    temp.put(FIRST_COLUMN, team1);
-                    temp.put(SECOND_COLUMN, team2);
-                    list.add(temp);
-                    final ListViewAdapterButton adapter = new ListViewAdapterButton(getActivity(), list);
-                    GameListView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });*/
-
         Button addGameButton= view.findViewById(R.id.addGame);
         Button gamesEndedButton = view.findViewById(R.id.gamesended);
 

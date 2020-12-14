@@ -440,6 +440,21 @@
             android:gravity="center_vertical"
             android:textColor="@color/green"
             android:textSize="30dp"></TextView>
+
+        <Button
+            android:id="@+id/End_Tracking"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="-15dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_corners"
+            android:text="End Tracking"
+            android:textSize="20dp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -454,7 +469,7 @@
         android:textSize="30dp">
 
         <Button
-            android:id="@+id/Points2"
+            android:id="@+id/Points2try"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
@@ -476,13 +491,13 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_toEndOf="@+id/Points2"
+            android:layout_toEndOf="@+id/Points2try"
             android:background="@drawable/rounded_corners"
             android:text="2 Points In"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/Points3"
+            android:id="@+id/Points3try"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
@@ -504,7 +519,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_toEndOf="@+id/Points3"
+            android:layout_toEndOf="@+id/Points3try"
             android:background="@drawable/rounded_corners"
             android:text="3 Points In"
             android:textSize="20dp" />

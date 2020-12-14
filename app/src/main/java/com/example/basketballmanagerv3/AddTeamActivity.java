@@ -107,10 +107,6 @@ public class AddTeamActivity extends AppCompatActivity {
                 String team = teamname.getText().toString();
                 String tag = teamshortcut.getText().toString();
                 String league = spinner.getSelectedItem().toString();
-/*                database = FirebaseDatabase.getInstance();
-                refernce = database.getReference("teams");
-                CollectHelperClass collect = new CollectHelperClass(team,tag,league);
-                refernce.push().setValue(collect);*/
                 if(conect.CONN() != null){
                     Statement statement = null;
                     try {

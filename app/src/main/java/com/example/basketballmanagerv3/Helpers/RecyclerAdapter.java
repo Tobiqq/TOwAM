@@ -18,10 +18,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     private static final String TAG = "RecyclerAdapter";
     List<String> listplayer1;
-
+    List<String> listplayer1number;
 
     public RecyclerAdapter(List<String> listplayer1) {
         this.listplayer1 = listplayer1;
+    }
+    public RecyclerAdapter(List<String> listplayer1, List<String> listplayer1number) {
+        this.listplayer1 = listplayer1;
+        this.listplayer1number = listplayer1number;;
     }
 
     @NonNull
@@ -36,7 +40,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.rowCountTextView.setText(String.valueOf(position));
+        holder.rowCountTextView.setText(listplayer1number.get(position));
         holder.textView.setText(listplayer1.get(position));
     }
 

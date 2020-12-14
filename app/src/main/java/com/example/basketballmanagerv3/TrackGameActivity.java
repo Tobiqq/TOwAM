@@ -12,8 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
 import com.example.basketballmanagerv3.Helpers.Player;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +27,7 @@ public class TrackGameActivity extends AppCompatActivity {
     ListView Player1ListView;
     ListView Player2ListView;
     String[] tab;
+    String[] tab2;
 
     Button[] tabButtons = new Button[25];
     private ArrayList<String> listplayer1;
@@ -95,6 +100,7 @@ public class TrackGameActivity extends AppCompatActivity {
         Player1ListView = findViewById(R.id.listView4);
         Player2ListView = findViewById(R.id.listView5);
         tab = new String[25];
+        tab2 = new String[25];
 
 
 
@@ -136,11 +142,13 @@ public class TrackGameActivity extends AppCompatActivity {
 
             }else{
                 tab[i] = listplayer1number.get(i);
+                tab2[i] = listplayer1.get(i);
             }
             if(tab[i]==null){
                 tabButtons[i].setVisibility(View.INVISIBLE);
             }else
             tabButtons[i].setText(tab[i]);
+            tabButtons[i].setHint(tab2[i]);;
             j++;
         }
 
@@ -151,11 +159,13 @@ public class TrackGameActivity extends AppCompatActivity {
 
             }else{
                 tab[z] = listplayer2number.get(z-12);
+                tab2[z] = listplayer2.get(z-12);
             }
             if(tab[z]==null){
                 tabButtons[z].setVisibility(View.INVISIBLE);
             }else
             tabButtons[z].setText(tab[z]);
+            tabButtons[z].setHint(tab2[z]);;
             k++;
         }
 
@@ -571,54 +581,47 @@ public class TrackGameActivity extends AppCompatActivity {
 
 
 
-        Button bReb = findViewById(R.id.Rebound_off);
-        bReb.setOnClickListener(new View.OnClickListener() {
+        Button bReb1 = findViewById(R.id.Rebound_off);
+        bReb1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < tabButtons2.size(); i++){
                     if(tabButtons2.get(i).isSelected() == true){
                         for (int j = 0; j < listfirst.size(); j++){
-                            if(listfirst.get(j).getname() == tabButtons2.get(i).getText()){
-                                listfirst.get(j).addrebound();
-                                Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getreb()));
-/*                                final int pp = j;
-
-                                String path = "teams/"+team1key+"/players/";
-                                Query reference = FirebaseDatabase.getInstance().getReference(path).orderByChild("playername").equalTo(listfirst.get(j).getname());
-                                Query reference2 = FirebaseDatabase.getInstance().getReference("teams").child(team1key).child("players");
-                                reference.addListenerForSingleValueEvent(new ValueEventListener(){
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                            String playern = dataSnapshot.child("playername").getValue(String.class);
-                                            if(playern == listfirst.get(pp).getname()){
-                                                player1key = dataSnapshot.getKey();
-
-                                        }
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
-
-
-
-                                database = FirebaseDatabase.getInstance();
-                                refernce = database.getReference("teams/"+ team1key +"/players/"+ player1key+"/rebound");
-                                String name = listfirst.get(j).getname();
-                                int mno = 0;
-                                String number = String.valueOf(mno);
-                                int number2 = listfirst.get(j).getreb();
-                                CollectHelperClass collect = new CollectHelperClass(name,number2,number);
-                                refernce.push().setValue(collect);
-                                Context context = getApplicationContext();
-                                Toast.makeText(context, "Data added succesfully!!", Toast.LENGTH_SHORT).show();*/
+                            if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
+                                listfirst.get(j).addreboundoff();
+                                Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getreboff()));
                             }
                         }
 
                         for (int k = 0; k < listsecond.size(); k++){
-                            if(listsecond.get(k).getname() == tabButtons2.get(i).getText()){
-                                listsecond.get(k).addrebound();
-                                Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getreb()));
+                            if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
+                                listsecond.get(k).addreboundoff();
+                                Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getreboff()));
+                            }
+                        }
+                    }else{}
+                }
+            }
+        });
+
+        Button bReb2 = findViewById(R.id.Rebound_deff);
+        bReb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < tabButtons2.size(); i++){
+                    if(tabButtons2.get(i).isSelected() == true){
+                        for (int j = 0; j < listfirst.size(); j++){
+                            if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
+                                listfirst.get(j).addrebounddeff();
+                                Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getrebdeff()));
+                            }
+                        }
+
+                        for (int k = 0; k < listsecond.size(); k++){
+                            if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
+                                listsecond.get(k).addrebounddeff();
+                                Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getrebdeff()));
                             }
                         }
                     }else{}
@@ -635,13 +638,13 @@ public class TrackGameActivity extends AppCompatActivity {
                 for (int i = 0; i < tabButtons2.size(); i++){
                     if(tabButtons2.get(i).isSelected() == true){
                         for (int j = 0; j < listfirst.size(); j++){
-                            if(listfirst.get(j).getname() == tabButtons2.get(i).getText()){
+                            if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).addsteal();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getsteal()));
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
-                            if(listsecond.get(k).getname() == tabButtons2.get(i).getText()){
+                            if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).addsteal();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getsteal()));
                             }
@@ -658,13 +661,13 @@ public class TrackGameActivity extends AppCompatActivity {
                 for (int i = 0; i < tabButtons2.size(); i++){
                     if(tabButtons2.get(i).isSelected() == true){
                         for (int j = 0; j < listfirst.size(); j++){
-                            if(listfirst.get(j).getnumber() == Integer.parseInt((String) tabButtons2.get(i).getText())){
+                            if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).addasist();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getasis()));
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
-                            if(listsecond.get(k).getname() == tabButtons2.get(i).getText()){
+                            if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).addasist();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getasis()));
                             }
@@ -674,20 +677,20 @@ public class TrackGameActivity extends AppCompatActivity {
             }
         });
 
-        Button b2points = findViewById(R.id.Points2);
+        Button b2points = findViewById(R.id.Points2in);
         b2points.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < tabButtons2.size(); i++){
                     if(tabButtons2.get(i).isSelected() == true){
                         for (int j = 0; j < listfirst.size(); j++){
-                            if(listfirst.get(j).getname() == tabButtons2.get(i).getText()){
+                            if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).add2points();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).get2points()));
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
-                            if(listsecond.get(k).getname() == tabButtons2.get(i).getText()){
+                            if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).add2points();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).get2points()));
                             }
@@ -697,20 +700,43 @@ public class TrackGameActivity extends AppCompatActivity {
             }
         });
 
-        Button b3points = findViewById(R.id.Points3);
+        Button b2pointstry = findViewById(R.id.Points2try);
+        b2pointstry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < tabButtons2.size(); i++){
+                    if(tabButtons2.get(i).isSelected() == true){
+                        for (int j = 0; j < listfirst.size(); j++){
+                            if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
+                                listfirst.get(j).add2pointstry();
+                                Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).get2pointstry()));
+                            }
+                        }
+                        for (int k = 0; k < listsecond.size(); k++){
+                            if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
+                                listsecond.get(k).add2pointstry();
+                                Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).get2pointstry()));
+                            }
+                        }
+                    }else{}
+                }
+            }
+        });
+
+        Button b3points = findViewById(R.id.Points3in);
         b3points.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < tabButtons2.size(); i++){
                     if(tabButtons2.get(i).isSelected() == true){
                         for (int j = 0; j < listfirst.size(); j++){
-                            if(listfirst.get(j).getname() == tabButtons2.get(i).getText()){
+                            if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).add3points();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).get3points()));
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
-                            if(listsecond.get(k).getname() == tabButtons2.get(i).getText()){
+                            if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).add3points();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).get3points()));
                             }
@@ -720,6 +746,142 @@ public class TrackGameActivity extends AppCompatActivity {
             }
         });
 
+        Button b3pointstry = findViewById(R.id.Points3try);
+        b3pointstry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < tabButtons2.size(); i++){
+                    if(tabButtons2.get(i).isSelected() == true){
+                        for (int j = 0; j < listfirst.size(); j++){
+                            if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
+                                listfirst.get(j).add3pointstry();
+                                Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).get3pointstry()));
+                            }
+                        }
+                        for (int k = 0; k < listsecond.size(); k++){
+                            if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
+                                listsecond.get(k).add3pointstry();
+                                Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).get3pointstry()));
+                            }
+                        }
+                    }else{}
+                }
+            }
+        });
+
+        Button turnover = findViewById(R.id.Turnover);
+        turnover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < tabButtons2.size(); i++){
+                    if(tabButtons2.get(i).isSelected() == true){
+                        for (int j = 0; j < listfirst.size(); j++){
+                            if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
+                                listfirst.get(j).addto();
+                                Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getto()));
+                            }
+                        }
+                        for (int k = 0; k < listsecond.size(); k++){
+                            if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
+                                listsecond.get(k).addto();
+                                Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getto()));
+                            }
+                        }
+                    }else{}
+                }
+            }
+        });
+
+
+        final int[] twopointsin = new int[1];
+        final int[] twopointstry = new int[1];
+        final int[] threepointsin = new int[1];
+        final int[] threepointstry = new int[1];
+        final int[] reboff = new int[1];
+        final int[] rebdeff = new int[1];
+        final int[] asist = new int[1];
+        final int[] steal = new int[1];
+        final int[] to = new int[1];
+
+        final Button endtracking = findViewById(R.id.End_Tracking);
+        endtracking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < listfirst.size()+listsecond.size(); i++) {
+                    if(i < listfirst.size()){
+                        twopointsin[0] = listfirst.get(i).get2points();
+                        twopointstry[0] = listfirst.get(i).get2pointstry();
+                        threepointsin[0] = listfirst.get(i).get3points();
+                        threepointstry[0] = listfirst.get(i).get3pointstry();
+                        reboff[0] = listfirst.get(i).getreboff();
+                        rebdeff[0] = listfirst.get(i).getrebdeff();
+                        asist[0] = listfirst.get(i).getasis();
+                        steal[0] = listfirst.get(i).getsteal();
+                        to[0] = listfirst.get(i).getto();
+                    }
+                    if(i >= listfirst.size()){
+                        i=i+1;
+                        twopointsin[0] = listsecond.get(i-listsecond.size()).get2points();
+                        twopointstry[0] = listsecond.get(i-listsecond.size()).get2pointstry();
+                        threepointsin[0] = listsecond.get(i-listsecond.size()).get3points();
+                        threepointstry[0] = listsecond.get(i-listsecond.size()).get3pointstry();
+                        reboff[0] = listsecond.get(i-listsecond.size()).getreboff();
+                        rebdeff[0] = listsecond.get(i-listsecond.size()).getrebdeff();
+                        asist[0] = listsecond.get(i-listsecond.size()).getasis();
+                        steal[0] = listsecond.get(i-listsecond.size()).getsteal();
+                        to[0] = listsecond.get(i-listsecond.size()).getto();
+                        i=i-1;
+                    }
+
+                    final ConnectionsClass conect = new ConnectionsClass();
+                    if (conect.CONN() != null) {
+                        Statement statement = null;
+                        Statement statement2 = null;
+                        Statement statement3 = null;
+                        Statement statement4 = null;
+                        Statement statement5 = null;
+                        try {
+                            statement = conect.CONN().createStatement();
+                            statement2 = conect.CONN().createStatement();
+                            statement3 = conect.CONN().createStatement();
+                            statement4 = conect.CONN().createStatement();
+                            statement5 = conect.CONN().createStatement();
+
+                            int idstatscount = 0;
+                            int idgame = 0;
+                            List<Integer> idplayer = new ArrayList<>();
+
+                            ResultSet result = statement2.executeQuery("SELECT id_game FROM Games WHERE id_team_home = (SELECT id_team FROM Teams WHERE teamname = '"+teamname1+"')"+ "AND id_team_guest = (SELECT id_team FROM Teams WHERE teamname = '"+teamname2+"')");
+                            while (result.next()) {
+                                idgame = result.getInt(1);
+                            }
+                            ResultSet result2 = statement3.executeQuery("SELECT id_player FROM Players WHERE id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname1+"')"+ "OR id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname2+"')");
+                            while (result2.next()) {
+                                int temp = result2.getInt(1);
+                                idplayer.add(temp);
+                            }
+                            ResultSet idstats = statement.executeQuery("SELECT COUNT (id_stats) AS total FROM Match_stats");
+                            while (idstats.next()) {
+                                idstatscount = idstats.getInt("total");
+                                idstatscount += 1;
+                                statement4.executeUpdate("SET IDENTITY_INSERT Match_stats ON");
+                                statement4.executeUpdate("INSERT INTO Match_stats (id_stats, id_game, id_player, Two_points_made, Two_points_try, Three_points_made, Three_points_try, Free_points_made, Free_points_try, Rebounds_off, Rebounds_def, Steals, Blocks, Turnovers, Fouls)" +
+                                        "VALUES('"+idstatscount+"','"+idgame+"','" +idplayer.get(i)+"','"+twopointsin[0]+"','"+twopointstry[0]+"','"+threepointstry[0]+"','"+threepointstry[0]+"','0','0','"+rebdeff[0]+"','"+rebdeff[0]+"','"+steal[0]+"','0','"+to[0]+"','0')");
+                            }
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    }
+                }
+                endtracking.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent in = new Intent(getApplicationContext(), SixthActivity.class);
+                        startActivity(in);
+                    }
+                });
+            }
+        });
     }
 }
 

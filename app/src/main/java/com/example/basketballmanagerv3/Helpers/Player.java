@@ -5,11 +5,15 @@ public class Player {
     private int playernumber;
 
     int points2 = 0;
+    int points2try = 0;
     int points3 = 0;
-    int reb = 0;
+    int points3try = 0;
+    int reboff = 0;
+    int rebdeff = 0;
     int asis = 0;
     int block = 0;
     int steal = 0;
+    int to = 0;
 
     public Player() {
 
@@ -25,7 +29,7 @@ public class Player {
         return null;
     }
 
-    public void addrebound(){
+    public void addreboundoff(){
 /*        final ConnectionsClass conect = new ConnectionsClass();
         if(conect.CONN() != null){
             Statement statement = null;
@@ -42,7 +46,11 @@ public class Player {
                 throwables.printStackTrace();
             }
         }*/
-        reb += 1;
+        reboff += 1;
+    }
+
+    public void addrebounddeff(){
+        rebdeff += 1;
     }
 
     public void addsteal(){
@@ -65,6 +73,18 @@ public class Player {
         points3 += 1;
     }
 
+    public void add2pointstry(){
+        points2try += 1;
+    }
+
+    public void add3pointstry(){
+        points3try += 1;
+    }
+
+    public void addto(){
+        to += 1;
+    }
+
     public String getname(){
         return playername;
     }
@@ -72,8 +92,11 @@ public class Player {
         return playernumber;
     }
 
-    public int getreb(){
-        return reb;
+    public int getreboff(){
+        return reboff;
+    }
+    public int getrebdeff(){
+        return rebdeff;
     }
     public int getasis(){
         return asis;
@@ -86,5 +109,14 @@ public class Player {
     }
     public int get3points(){
         return points3;
+    }
+    public int get2pointstry(){
+        return points2try;
+    }
+    public int get3pointstry(){
+        return points3try;
+    }
+    public int getto(){
+        return to;
     }
 }

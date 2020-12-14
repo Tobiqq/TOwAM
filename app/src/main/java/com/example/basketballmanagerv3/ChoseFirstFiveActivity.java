@@ -96,11 +96,11 @@ public class ChoseFirstFiveActivity extends AppCompatActivity {
             }
         }
 
-        recyclerAdapter = new RecyclerAdapter(listplayer1);
+        recyclerAdapter = new RecyclerAdapter(listplayer1, listplayer1number);
         final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
 
-        recyclerAdapter2 = new RecyclerAdapter(listplayer2);
+        recyclerAdapter2 = new RecyclerAdapter(listplayer2, listplayer2number);
         final ItemTouchHelper itemTouchHelper2 = new ItemTouchHelper(simpleCallback);
         final DividerItemDecoration dividerItemDecoration2 = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
 
@@ -142,6 +142,7 @@ public class ChoseFirstFiveActivity extends AppCompatActivity {
             int fromPosition = viewHolder.getAdapterPosition();
             int toPosition = target.getAdapterPosition();
             Collections.swap(listplayer1, fromPosition, toPosition);
+            Collections.swap(listplayer1number, fromPosition, toPosition);
             recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
             return false;
         }
