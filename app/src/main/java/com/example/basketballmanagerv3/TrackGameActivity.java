@@ -24,9 +24,11 @@ public class TrackGameActivity extends AppCompatActivity {
     ListView Player2ListView;
     String[] tab;
 
-    Button[] tabButtons = new Button[12];
+    Button[] tabButtons = new Button[25];
     private ArrayList<String> listplayer1;
     private ArrayList<String> listplayer2;
+    private ArrayList<String> listplayer1number;
+    private ArrayList<String> listplayer2number;
     List<Player> listsecond = new ArrayList<>();
     List<Player> listfirst = new ArrayList<>();
     List<Button> tabButtons2 = new ArrayList<>();
@@ -43,11 +45,26 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons[2] = findViewById(R.id.player3);
         tabButtons[3] = findViewById(R.id.player4);
         tabButtons[4] = findViewById(R.id.player5);
-        tabButtons[5] = findViewById(R.id.player7);
-        tabButtons[6] = findViewById(R.id.player8);
-        tabButtons[7] = findViewById(R.id.player9);
-        tabButtons[8] = findViewById(R.id.player10);
-        tabButtons[9] = findViewById(R.id.player11);
+        tabButtons[5] = findViewById(R.id.player6);
+        tabButtons[6] = findViewById(R.id.player7);
+        tabButtons[7] = findViewById(R.id.player8);
+        tabButtons[8] = findViewById(R.id.player9);
+        tabButtons[9] = findViewById(R.id.player10);
+        tabButtons[10] = findViewById(R.id.player11);
+        tabButtons[11] = findViewById(R.id.player12);
+        tabButtons[12] = findViewById(R.id.player13);
+        tabButtons[13] = findViewById(R.id.player14);
+        tabButtons[14] = findViewById(R.id.player15);
+        tabButtons[15] = findViewById(R.id.player16);
+        tabButtons[16] = findViewById(R.id.player17);
+        tabButtons[17] = findViewById(R.id.player18);
+        tabButtons[18] = findViewById(R.id.player19);
+        tabButtons[19] = findViewById(R.id.player20);
+        tabButtons[20] = findViewById(R.id.player21);
+        tabButtons[21] = findViewById(R.id.player22);
+        tabButtons[22] = findViewById(R.id.player23);
+        tabButtons[23] = findViewById(R.id.player24);
+
 
         tabButtons2.add(tabButtons[0]);
         tabButtons2.add(tabButtons[1]);
@@ -59,11 +76,25 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.add(tabButtons[7]);
         tabButtons2.add(tabButtons[8]);
         tabButtons2.add(tabButtons[9]);
+        tabButtons2.add(tabButtons[10]);
+        tabButtons2.add(tabButtons[11]);
+        tabButtons2.add(tabButtons[12]);
+        tabButtons2.add(tabButtons[13]);
+        tabButtons2.add(tabButtons[14]);
+        tabButtons2.add(tabButtons[15]);
+        tabButtons2.add(tabButtons[16]);
+        tabButtons2.add(tabButtons[17]);
+        tabButtons2.add(tabButtons[18]);
+        tabButtons2.add(tabButtons[19]);
+        tabButtons2.add(tabButtons[20]);
+        tabButtons2.add(tabButtons[21]);
+        tabButtons2.add(tabButtons[22]);
+        tabButtons2.add(tabButtons[23]);
 
 
         Player1ListView = findViewById(R.id.listView4);
         Player2ListView = findViewById(R.id.listView5);
-        tab = new String[10];
+        tab = new String[25];
 
 
 
@@ -82,37 +113,48 @@ public class TrackGameActivity extends AppCompatActivity {
         listplayer1 = in.getStringArrayListExtra("team1players");
         listplayer2 = in.getStringArrayListExtra("team2players");
 
+        listplayer1number = new ArrayList<>();
+        listplayer2number = new ArrayList<>();
+        listplayer1number = in.getStringArrayListExtra("team1playersnb");
+        listplayer2number = in.getStringArrayListExtra("team2playersnb");
+
 
 
         for (int i = 0; i < listplayer1.size(); i++){
-            Player player = new Player(listplayer1.get(i));
+            Player player = new Player(listplayer1.get(i), Integer.parseInt(listplayer1number.get(i)));
             listfirst.add(player);
         }
 
         for (int i = 0; i < listplayer2.size(); i++){
-            Player player = new Player(listplayer2.get(i));
+            Player player = new Player(listplayer2.get(i), Integer.parseInt(listplayer2number.get(i)));
             listsecond.add(player);
         }
 
         int j = 0;
-        for (int i = 0; i < 5; i++){
-            if(j > listplayer1.size()-1){
+        for (int i = 0; i < 12; i++){
+            if(j > listplayer1number.size()-1){
 
             }else{
-                tab[i] = listplayer1.get(i);
+                tab[i] = listplayer1number.get(i);
             }
+            if(tab[i]==null){
+                tabButtons[i].setVisibility(View.INVISIBLE);
+            }else
             tabButtons[i].setText(tab[i]);
             j++;
         }
 
 
         int k = 0;
-        for (int z = 5; z < 10; z++){
-            if(k > listplayer2.size()-1){
+        for (int z = 12; z < 24; z++){
+            if(k > listplayer2number.size()-1){
 
             }else{
-                tab[z] = listplayer2.get(z-5);
+                tab[z] = listplayer2number.get(z-12);
             }
+            if(tab[z]==null){
+                tabButtons[z].setVisibility(View.INVISIBLE);
+            }else
             tabButtons[z].setText(tab[z]);
             k++;
         }
@@ -122,7 +164,7 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.get(0).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= 9; i++){
+                for (int i = 0; i <= 23; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
                 }
@@ -139,7 +181,7 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.get(1).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= 9; i++){
+                for (int i = 0; i <= 23; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
                 }
@@ -156,7 +198,7 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.get(2).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= 9; i++){
+                for (int i = 0; i <= 23; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
                 }
@@ -173,7 +215,7 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.get(3).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= 9; i++){
+                for (int i = 0; i <= 23; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
                 }
@@ -190,7 +232,7 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.get(4).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= 9; i++){
+                for (int i = 0; i <= 23; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
                 }
@@ -207,7 +249,7 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.get(5).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= 9; i++){
+                for (int i = 0; i <= 23; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
                 }
@@ -224,7 +266,7 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.get(6).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= 9; i++){
+                for (int i = 0; i <= 23; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
                 }
@@ -241,7 +283,7 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.get(7).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= 9; i++){
+                for (int i = 0; i <= 23; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
                 }
@@ -258,7 +300,7 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.get(8).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= 9; i++){
+                for (int i = 0; i <= 23; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
                 }
@@ -275,7 +317,7 @@ public class TrackGameActivity extends AppCompatActivity {
         tabButtons2.get(9).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= 9; i++) {
+                for (int i = 0; i <= 23; i++) {
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
                 }
@@ -289,41 +331,247 @@ public class TrackGameActivity extends AppCompatActivity {
             }
         });
 
-        Button change1 = findViewById(R.id.player6);
-        change1.setOnClickListener(new View.OnClickListener(){
+        tabButtons2.get(10).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), NinethActivity.class);
-                in.putExtra("team1", teamname1);
-                in.putExtra("team2", teamname2);
-                in.putExtra("position", position);
-                in.putExtra("team1players", listplayer1);
-                in.putExtra("team2players", listplayer2);
-                in.putExtra("team2players", listplayer2);
-                in.putExtra("listfirst1", String.valueOf(listfirst));
-                in.putExtra("listsecond2", String.valueOf(listsecond));
-                startActivity(in);
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(10).setSelected(true);
+
+                if (tabButtons2.get(10).isSelected()) {
+                    tabButtons2.get(10).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(10).setTextColor(Color.BLACK);
+                }
             }
         });
-        Button change2 = findViewById(R.id.player12);
-        change2.setOnClickListener(new View.OnClickListener(){
+
+        tabButtons2.get(11).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), NinethActivity.class);
-                in.putExtra("team1", teamname1);
-                in.putExtra("team2", teamname2);
-                in.putExtra("position", position);
-                in.putExtra("team1players", listplayer1);
-                in.putExtra("team2players", listplayer2);
-                in.putExtra("listfirst1", String.valueOf(listfirst));
-                in.putExtra("listsecond2", String.valueOf(listsecond));
-                startActivity(in);
-            }
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(11).setSelected(true);
 
+                if (tabButtons2.get(11).isSelected()) {
+                    tabButtons2.get(11).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(11).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(12).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(12).setSelected(true);
+
+                if (tabButtons2.get(12).isSelected()) {
+                    tabButtons2.get(12).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(12).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(13).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(13).setSelected(true);
+
+                if (tabButtons2.get(13).isSelected()) {
+                    tabButtons2.get(13).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(13).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(14).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(14).setSelected(true);
+
+                if (tabButtons2.get(14).isSelected()) {
+                    tabButtons2.get(14).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(14).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(15).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(15).setSelected(true);
+
+                if (tabButtons2.get(15).isSelected()) {
+                    tabButtons2.get(15).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(15).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(16).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(16).setSelected(true);
+
+                if (tabButtons2.get(16).isSelected()) {
+                    tabButtons2.get(16).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(16).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(17).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(17).setSelected(true);
+
+                if (tabButtons2.get(17).isSelected()) {
+                    tabButtons2.get(17).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(17).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(18).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(18).setSelected(true);
+
+                if (tabButtons2.get(18).isSelected()) {
+                    tabButtons2.get(18).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(18).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(19).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(19).setSelected(true);
+
+                if (tabButtons2.get(19).isSelected()) {
+                    tabButtons2.get(19).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(19).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(20).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(20).setSelected(true);
+
+                if (tabButtons2.get(20).isSelected()) {
+                    tabButtons2.get(20).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(20).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(21).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(21).setSelected(true);
+
+                if (tabButtons2.get(21).isSelected()) {
+                    tabButtons2.get(21).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(21).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(22).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(22).setSelected(true);
+
+                if (tabButtons2.get(22).isSelected()) {
+                    tabButtons2.get(22).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(22).setTextColor(Color.BLACK);
+                }
+            }
+        });
+
+        tabButtons2.get(23).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <= 23; i++) {
+                    tabButtons2.get(i).setSelected(false);
+                    tabButtons2.get(i).setTextColor(Color.BLACK);
+                }
+                tabButtons2.get(23).setSelected(true);
+
+                if (tabButtons2.get(23).isSelected()) {
+                    tabButtons2.get(23).setTextColor(Color.GREEN);
+                } else {
+                    tabButtons2.get(23).setTextColor(Color.BLACK);
+                }
+            }
         });
 
 
-        Button bReb = findViewById(R.id.Rebound);
+
+        Button bReb = findViewById(R.id.Rebound_off);
         bReb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -410,7 +658,7 @@ public class TrackGameActivity extends AppCompatActivity {
                 for (int i = 0; i < tabButtons2.size(); i++){
                     if(tabButtons2.get(i).isSelected() == true){
                         for (int j = 0; j < listfirst.size(); j++){
-                            if(listfirst.get(j).getname() == tabButtons2.get(i).getText()){
+                            if(listfirst.get(j).getnumber() == Integer.parseInt((String) tabButtons2.get(i).getText())){
                                 listfirst.get(j).addasist();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getasis()));
                             }

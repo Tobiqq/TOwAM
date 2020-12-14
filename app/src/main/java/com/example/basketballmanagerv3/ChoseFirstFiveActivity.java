@@ -32,6 +32,9 @@ public class ChoseFirstFiveActivity extends AppCompatActivity {
     private ArrayList<String> listplayer1;
     private ArrayList<String> listplayer2;
 
+    private ArrayList<String> listplayer1number;
+    private ArrayList<String> listplayer2number;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,9 @@ public class ChoseFirstFiveActivity extends AppCompatActivity {
         listplayer1 = new ArrayList<>();
         listplayer2 = new ArrayList<>();
 
+        listplayer1number = new ArrayList<>();
+        listplayer2number = new ArrayList<>();
+
         TextView team1 = findViewById(R.id.home);
         TextView team2 = findViewById(R.id.guest);
         team1.setText(teamname1);
@@ -57,9 +63,13 @@ public class ChoseFirstFiveActivity extends AppCompatActivity {
         if(conect.CONN() != null){
             Statement statement = null;
             Statement statement2 = null;
+            Statement statement3 = null;
+            Statement statement4 = null;
             try {
                 statement = conect.CONN().createStatement();
                 statement2 = conect.CONN().createStatement();
+                statement3 = conect.CONN().createStatement();
+                statement4 = conect.CONN().createStatement();
                 ResultSet result = statement.executeQuery("SELECT player_name FROM Players WHERE id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname1+"')");
                 while (result.next()) {
                     String temp = result.getString(1);
@@ -69,6 +79,16 @@ public class ChoseFirstFiveActivity extends AppCompatActivity {
                 while (result2.next()) {
                     String temp2 = result2.getString(1);
                     listplayer2.add(temp2);
+                }
+                ResultSet result3 = statement3.executeQuery("SELECT number FROM Players WHERE id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname1+"')");
+                while (result3.next()) {
+                    String temp3 = result3.getString(1);
+                    listplayer1number.add(temp3);
+                }
+                ResultSet result4 = statement4.executeQuery("SELECT number FROM Players WHERE id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname2+"')");
+                while (result4.next()) {
+                    String temp4 = result4.getString(1);
+                    listplayer2number.add(temp4);
                 }
             }
             catch (SQLException throwables) {
@@ -108,6 +128,8 @@ public class ChoseFirstFiveActivity extends AppCompatActivity {
                 in.putExtra("position", position);
                 in.putExtra("team1players", listplayer1);
                 in.putExtra("team2players", listplayer2);
+                in.putExtra("team1playersnb", listplayer1number);
+                in.putExtra("team2playersnb", listplayer2number);
                 startActivity(in);
             }
         });

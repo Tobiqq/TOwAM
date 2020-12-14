@@ -15,8 +15,9 @@ public class Player {
 
     }
 
-    public Player(String playername) {
+    public Player(String playername, int playernumber) {
         this.playername = playername;
+        this.playernumber = playernumber;
     }
 
     public Player setname(String playername){
@@ -66,6 +67,9 @@ public class Player {
 
     public String getname(){
         return playername;
+    }
+    public int getnumber(){
+        return playernumber;
     }
 
     public int getreb(){
