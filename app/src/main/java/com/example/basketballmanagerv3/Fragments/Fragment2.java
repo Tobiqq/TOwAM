@@ -17,7 +17,7 @@ import com.example.basketballmanagerv3.AddGameActivity;
 import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
 import com.example.basketballmanagerv3.Helpers.ListViewAdapterButton;
 import com.example.basketballmanagerv3.R;
-import com.example.basketballmanagerv3.SixthActivity;
+import com.example.basketballmanagerv3.GamesEndedActivity;
 import com.example.basketballmanagerv3.TrackGameActivity;
 
 import java.sql.ResultSet;
@@ -62,7 +62,7 @@ public class Fragment2 extends Fragment {
                 statement = conect.CONN().createStatement();
                 statement2 = conect.CONN().createStatement();
                 statement3 = conect.CONN().createStatement();
-                ResultSet result = statement.executeQuery("SELECT * FROM Games");
+                ResultSet result = statement.executeQuery("SELECT * FROM Games WHERE game_state = '1'");
                 while (result.next()) {
                     IdListGames.add(result.getString("id_game"));
                     team1 = result.getInt("id_team_home");
@@ -116,7 +116,7 @@ public class Fragment2 extends Fragment {
         gamesEndedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent secin = new Intent(getActivity(), SixthActivity.class);
+                Intent secin = new Intent(getActivity(), GamesEndedActivity.class);
                 startActivity(secin);
             }
         });

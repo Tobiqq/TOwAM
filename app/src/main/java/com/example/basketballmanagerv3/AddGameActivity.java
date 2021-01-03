@@ -15,8 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,8 +27,6 @@ public class AddGameActivity extends AppCompatActivity {
 
     Button Savebutton, Cancelbutton;
 
-    FirebaseDatabase database;
-    DatabaseReference refernce;
 
     final ArrayList<String> list = new ArrayList<>();
 

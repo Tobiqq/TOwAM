@@ -867,6 +867,7 @@ public class TrackGameActivity extends AppCompatActivity {
                                 statement4.executeUpdate("SET IDENTITY_INSERT Match_stats ON");
                                 statement4.executeUpdate("INSERT INTO Match_stats (id_stats, id_game, id_player, Two_points_made, Two_points_try, Three_points_made, Three_points_try, Free_points_made, Free_points_try, Rebounds_off, Rebounds_def, Steals, Blocks, Turnovers, Fouls)" +
                                         "VALUES('"+idstatscount+"','"+idgame+"','" +idplayer.get(i)+"','"+twopointsin[0]+"','"+twopointstry[0]+"','"+threepointstry[0]+"','"+threepointstry[0]+"','0','0','"+rebdeff[0]+"','"+rebdeff[0]+"','"+steal[0]+"','0','"+to[0]+"','0')");
+                                statement4.executeUpdate("UPDATE Games SET game_state = '0' WHERE id_game = '"+idgame+"'");
                             }
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
@@ -876,7 +877,7 @@ public class TrackGameActivity extends AppCompatActivity {
                 endtracking.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent in = new Intent(getApplicationContext(), SixthActivity.class);
+                        Intent in = new Intent(getApplicationContext(), GamesEndedActivity.class);
                         startActivity(in);
                     }
                 });

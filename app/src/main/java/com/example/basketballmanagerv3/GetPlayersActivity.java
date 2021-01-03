@@ -3,6 +3,7 @@ package com.example.basketballmanagerv3;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ public class GetPlayersActivity extends AppCompatActivity {
 
 
         Intent in = getIntent();
-        String teamname = in.getStringExtra("team");
+        final String teamname = in.getStringExtra("team");
         final String position = getIntent().getExtras().getString("position");
         final String Id = in.getStringExtra("id");
         TextView team = findViewById(R.id.team_name);
@@ -82,36 +83,22 @@ public class GetPlayersActivity extends AppCompatActivity {
                     final ListViewAdapter adapter = new ListViewAdapter(GetPlayersActivity.this, list2);
                     PlayerListView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         }
 
-        /*DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("teams/"+ Id +"/players");
-        reference.addValueEventListener(new ValueEventListener() {
+        PlayerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String name = snapshot.child("playername").getValue(String.class);
-                    int number = snapshot.child("playerNumber").getValue(int.class);
-                    String position = snapshot.child("position").getValue(String.class);
-                    HashMap<String, String> temp = new HashMap<String, String>();
-                    temp.put(FIRST_COLUMN, name);
-                    temp.put(SECOND_COLUMN, Integer.toString(number));
-                    temp.put(THIRD_COLUMN, position);
-                    list2.add(temp);
-                    final ListViewAdapter adapter = new ListViewAdapter(GetPlayersActivity.this, list2);
-                    PlayerListView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent in = new Intent(GetPlayersActivity.this, GetPlayersStats.class);
+                in.putExtra("name", list2.get(i).get(FIRST_COLUMN));
+                in.putExtra("position", i);
+                in.putExtra("team", teamname);
+                startActivity(in);
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });*/
+        });
     }
 }
