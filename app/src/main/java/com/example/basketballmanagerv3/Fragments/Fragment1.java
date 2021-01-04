@@ -98,31 +98,6 @@ public class Fragment1 extends Fragment {
         });
 
 
-/*        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("teams");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    IdList.add(snapshot.getKey());
-                    String team = snapshot.child("teamname").getValue(String.class);
-                    String tag = snapshot.child("teamtag").getValue(String.class);
-                    String league = snapshot.child("league").getValue(String.class);
-                    HashMap<String, String> temp = new HashMap<>();
-                    temp.put(FIRST_COLUMN, team);
-                    temp.put(SECOND_COLUMN, tag);
-                    temp.put(THIRD_COLUMN, league);
-                    list.add(temp);
-                    final ListViewAdapter adapter = new ListViewAdapter(getActivity(), list);
-                    TeamListView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
 
         Button btn = view.findViewById(R.id.addTeam);
         btn.setOnClickListener(new View.OnClickListener() {

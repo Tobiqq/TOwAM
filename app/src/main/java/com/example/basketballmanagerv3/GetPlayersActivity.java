@@ -61,6 +61,17 @@ public class GetPlayersActivity extends AppCompatActivity {
             }
         });
 
+        Button btn2 = findViewById(R.id.stats);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(GetPlayersActivity.this, ShowStats1Activity.class);
+                in.putExtra("team", teamname);
+                in.putExtra("id", Id);
+                startActivity(in);
+            }
+        });
+
 
         final ConnectionsClass conect = new ConnectionsClass();
         String name;

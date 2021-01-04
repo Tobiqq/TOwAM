@@ -2,136 +2,121 @@ package com.example.basketballmanagerv3;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
-import com.example.basketballmanagerv3.Helpers.RecyclerAdapter;
+import com.example.basketballmanagerv3.Helpers.ListViewAdapterStats2;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
+
+import static com.example.basketballmanagerv3.Helpers.Constants.FIRST_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.SECOND_COLUMN;
 
 public class ShowStats1Activity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    RecyclerView recyclerView2;
-    RecyclerAdapter recyclerAdapter;
-    RecyclerAdapter recyclerAdapter2;
-
-    private ArrayList<String> listplayer1;
-    private ArrayList<String> listplayer2;
-
-    private ArrayList<String> listplayer1number;
-    private ArrayList<String> listplayer2number;
+    ListView StatsListView;
+    private ArrayList<HashMap<String, String>> list2;
+    int temp;
+    int temp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_stats_1);
+        this.setTitle("Stats");
+        StatsListView = findViewById(R.id.listViewStats);
+        list2 = new ArrayList<HashMap<String, String>>();
+
 
         Intent in = getIntent();
-        final String teamname1 = in.getStringExtra("team1");
-        final String teamname2 = in.getStringExtra("team2");
-        final Integer position = getIntent().getExtras().getInt("position");
+        final String teamname = in.getStringExtra("team");
 
+        TextView team = findViewById(R.id.team_name);
+        team.setText("              " + teamname);
 
-        listplayer1 = new ArrayList<>();
-        listplayer2 = new ArrayList<>();
+        int twoptsmade;
+        int twoptstry;
+        int threeptsmade;
+        int threeptstry;
+        int freeptsmade;
+        int freeptstry;
+        int pkt;
 
-        listplayer1number = new ArrayList<>();
-        listplayer2number = new ArrayList<>();
-
-        TextView team1 = findViewById(R.id.home);
-        TextView team2 = findViewById(R.id.guest);
-        team1.setText(teamname1);
-        team2.setText(teamname2);
-
-
+        int vs = 0;
+        int vstwo = 0;
+        int vscomp = 0;
+        String vsendx = null;
 
         final ConnectionsClass conect = new ConnectionsClass();
+
+
         if(conect.CONN() != null){
             Statement statement = null;
             Statement statement2 = null;
             Statement statement3 = null;
             Statement statement4 = null;
+            Statement statement5 = null;
+            Statement statement6 = null;
             try {
                 statement = conect.CONN().createStatement();
                 statement2 = conect.CONN().createStatement();
                 statement3 = conect.CONN().createStatement();
                 statement4 = conect.CONN().createStatement();
-                ResultSet result = statement.executeQuery("SELECT player_name FROM Players WHERE id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname1+"')");
-                while (result.next()) {
-                    String temp = result.getString(1);
-                    listplayer1.add(temp);
+                statement5 = conect.CONN().createStatement();
+                statement6 = conect.CONN().createStatement();
+
+                ResultSet result = statement.executeQuery("SELECT id_game AS Total_id FROM Games WHERE game_state = '0' AND id_team_home = (SELECT id_team FROM Teams WHERE teamname = '"+teamname+"') OR game_state = '0' AND id_team_guest = (SELECT id_team FROM Teams WHERE teamname = '"+teamname+"')");
+                while(result.next()){
+                    temp = result.getInt("Total_id");
+
+                    ResultSet result3 = statement3.executeQuery("SELECT id_team_home, id_team_guest FROM Games WHERE id_game ='"+temp+"'");
+                    while(result3.next()) {
+                        vs = result3.getInt("id_team_home");
+                        vstwo = result3.getInt("id_team_guest");
+                    }
+                    ResultSet result4 = statement4.executeQuery("SELECT id_team FROM Teams WHERE teamname = '"+teamname+"'");
+                    while(result4.next()) {
+                        vscomp = result4.getInt("id_team");
+                    }
+                    if(vs == vscomp)
+                    {
+                        ResultSet result5 = statement5.executeQuery("SELECT teamname FROM Teams WHERE id_team = '"+vstwo+"'");
+                        while(result5.next()) {
+                            vsendx = result5.getString("teamname");
+                        }
+                    }else {
+                        ResultSet result6 = statement6.executeQuery("SELECT teamname FROM Teams WHERE id_team = '" + vs + "'");
+                        while (result6.next()) {
+                            vsendx = result6.getString("teamname");
+                        }
+                    }
+/*DODAĆ SUMOWANE PUNKTÓW DRUŻYN*/
+                    ResultSet result2 = statement2.executeQuery("SELECT SUM (Two_points_made) AS Total2 FROM Match_stats WHERE id_game ='"+temp+"'");
+                    while(result2.next()){
+                        temp2 = (result2.getInt("Total2") * 2);
+
+                        HashMap<String, String> temp = new HashMap<>();
+                        temp.put(SECOND_COLUMN, vsendx);
+                        temp.put(FIRST_COLUMN, temp2 + "");
+
+                        list2.add(temp);
+                        final ListViewAdapterStats2 adapter = new ListViewAdapterStats2(ShowStats1Activity.this, list2);
+                        StatsListView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
-                ResultSet result2 = statement2.executeQuery("SELECT player_name FROM Players WHERE id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname2+"')");
-                while (result2.next()) {
-                    String temp2 = result2.getString(1);
-                    listplayer2.add(temp2);
-                }
-                ResultSet result3 = statement3.executeQuery("SELECT number FROM Players WHERE id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname1+"')");
-                while (result3.next()) {
-                    String temp3 = result3.getString(1);
-                    listplayer1number.add(temp3);
-                }
-                ResultSet result4 = statement4.executeQuery("SELECT number FROM Players WHERE id_team = (SELECT id_team FROM Teams WHERE teamname = '"+teamname2+"')");
-                while (result4.next()) {
-                    String temp4 = result4.getString(1);
-                    listplayer2number.add(temp4);
-                }
-            }
-            catch (SQLException throwables) {
+            } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         }
-
-        recyclerAdapter = new RecyclerAdapter(listplayer1, listplayer1number);
-        final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
-
-        recyclerAdapter2 = new RecyclerAdapter(listplayer2, listplayer2number);
-        final ItemTouchHelper itemTouchHelper2 = new ItemTouchHelper(simpleCallback);
-        final DividerItemDecoration dividerItemDecoration2 = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView2 = findViewById(R.id.recyclerView2);
-
-        recyclerView.setAdapter(recyclerAdapter);
-        recyclerView.addItemDecoration(dividerItemDecoration);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
-
-        recyclerView2.setAdapter(recyclerAdapter2);
-        recyclerView2.addItemDecoration(dividerItemDecoration2);
-        itemTouchHelper2.attachToRecyclerView(recyclerView2);
-
-
     }
-
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-
-            int fromPosition = viewHolder.getAdapterPosition();
-            int toPosition = target.getAdapterPosition();
-            Collections.swap(listplayer1, fromPosition, toPosition);
-            Collections.swap(listplayer1number, fromPosition, toPosition);
-            recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-        }
-    };
 }
 
 
