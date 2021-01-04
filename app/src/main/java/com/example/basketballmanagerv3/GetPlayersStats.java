@@ -42,7 +42,7 @@ public class GetPlayersStats extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.get_players_stats);
-        this.setTitle("Players");
+        this.setTitle("Players Stats");
         StatsListView = findViewById(R.id.listViewStats);
         list2 = new ArrayList<>();
 

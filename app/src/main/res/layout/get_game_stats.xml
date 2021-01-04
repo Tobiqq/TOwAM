@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout2">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/layout"
+        android:contextClickable="true"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="30dp">
+
+        <TextView
+            android:id="@+id/team_name"
+            android:layout_width="1dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="640dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="      Team Name"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/layout"
+        android:contextClickable="true"
+        android:layout_below="@id/relativeLayout5"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="30dp">
+
+<TextView
+            android:id="@+id/sum"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="1dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Sum"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/twoptssum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/sum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2pts"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/threeptssum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/twoptssum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="3pts"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/oneptssum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/threeptssum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1pts"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/rebosum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/oneptssum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="R O"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/rebasum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/rebosum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="R A"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/stealsum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/rebasum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="S"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/blocksum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/stealsum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="B"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/turnsum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/blocksum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="T"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/foulssum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/turnsum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="F"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/pktsum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/foulssum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="pkt"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/evalsum"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/pktsum"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="+/-"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/relativeLayout3"
+        android:background="@color/layout2"
+        android:contextClickable="true"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="30dp">
+
+        <TextView
+            android:id="@+id/playerhome"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="1dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Player"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/twopts"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/playerhome"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2pts"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/threepts"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/twopts"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="3pts"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/onepts"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/threepts"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1pts"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/rebo"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/onepts"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="R O"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/reba"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/rebo"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="R A"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/steal"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/reba"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="S"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/block"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/steal"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="B"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/turn"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/block"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="T"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/fouls"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/turn"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="F"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/pkt"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/fouls"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="pkt"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/eval"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/pkt"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="+/-"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listViewStats"
+        android:layout_width="match_parent"
+        android:layout_height="267dp"
+        android:layout_below="@+id/relativeLayout4"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-1dp"
+        android:layout_marginBottom="393dp"
+        android:contextClickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:divider="@color/layout"
+        android:dividerHeight="2px"
+        android:focusable="true"
+        android:transcriptMode="alwaysScroll">
+        <!--        android:entries="@array/sections" -->
+        ></ListView>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout10"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="310dp"
+        android:background="@color/layout"
+        android:contextClickable="true"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="30dp">
+
+        <TextView
+            android:id="@+id/team_name2"
+            android:layout_width="1dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="640dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="      Team Name"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="240dp"
+        android:background="@color/layout"
+        android:contextClickable="true"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="30dp">
+
+<TextView
+            android:id="@+id/sum2"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="1dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Sum"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/twoptssum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/sum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2pts"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/threeptssum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/twoptssum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="3pts"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/oneptssum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/threeptssum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1pts"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/rebosum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/oneptssum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="R O"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/rebasum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/rebosum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="R A"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/stealsum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/rebasum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="S"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/blocksum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/stealsum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="B"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/turnsum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/blocksum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="T"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/foulssum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/turnsum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="F"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/pktsum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/foulssum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="pkt"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/evalsum2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/pktsum2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="+/-"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listViewStats2"
+        android:layout_width="match_parent"
+        android:layout_height="243dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-240dp"
+        android:layout_marginBottom="0dp"
+        android:contextClickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:divider="@color/layout"
+        android:dividerHeight="2px"
+        android:focusable="true"
+        android:transcriptMode="alwaysScroll">
+        <!--        android:entries="@array/sections" -->
+        >
+    </ListView>
+
+
+</RelativeLayout>

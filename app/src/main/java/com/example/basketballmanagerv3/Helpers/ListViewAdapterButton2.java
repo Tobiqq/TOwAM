@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.basketballmanagerv3.R;
-import com.example.basketballmanagerv3.ShowStats1Activity;
+import com.example.basketballmanagerv3.ShowStats2Activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,7 +73,7 @@ public class ListViewAdapterButton2 extends BaseAdapter {
             holder.showStats.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    Intent in = new Intent(activity, ShowStats1Activity.class);
+                    Intent in = new Intent(activity, ShowStats2Activity.class);
                     in.putExtra("team1", list.get(position).get(FIRST_COLUMN));
                     in.putExtra("team2", list.get(position).get(SECOND_COLUMN));
                     in.putExtra("position", position);

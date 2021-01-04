@@ -26,6 +26,7 @@
         <activity android:name=".ChoseFirstFiveActivity"></activity>
         <activity android:name="NinethActivity"></activity>
         <activity android:name="ShowStats1Activity"></activity>
+        <activity android:name="ShowStats2Activity"></activity>
         <activity android:name="GetPlayersStats"></activity>
     </application>
 
