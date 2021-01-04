@@ -12,7 +12,7 @@
 
     <TextView
         android:id="@+id/FirstText"
-        android:layout_width="371dp"
+        android:layout_width="426dp"
         android:layout_height="100dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/SecondText"
-        android:layout_width="367dp"
+        android:layout_width="426dp"
         android:layout_height="100dp"
         android:layout_weight="1"
         android:gravity="center"

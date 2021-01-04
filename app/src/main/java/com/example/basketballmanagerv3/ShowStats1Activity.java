@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
-import com.example.basketballmanagerv3.Helpers.ListViewAdapterStats2;
+import com.example.basketballmanagerv3.Helpers.ListViewAdapterButton3;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +38,6 @@ public class ShowStats1Activity extends AppCompatActivity {
         this.setTitle("Stats");
         StatsListView = findViewById(R.id.listViewStats);
         list2 = new ArrayList<HashMap<String, String>>();
-
 
         Intent in = getIntent();
         final String teamname = in.getStringExtra("team");
@@ -136,7 +135,7 @@ public class ShowStats1Activity extends AppCompatActivity {
                                                     temp.put(SECOND_COLUMN, vsendx);
                                                     temp.put(FIRST_COLUMN, wynikhome + " : "+ wynikguest);
                                                     list2.add(temp);
-                                                    final ListViewAdapterStats2 adapter = new ListViewAdapterStats2(ShowStats1Activity.this, list2);
+                                                    final ListViewAdapterButton3 adapter = new ListViewAdapterButton3(ShowStats1Activity.this, list2, teamname);
                                                     StatsListView.setAdapter(adapter);
                                                     adapter.notifyDataSetChanged();
                                                 }
@@ -181,7 +180,7 @@ public class ShowStats1Activity extends AppCompatActivity {
                                                     temp.put(SECOND_COLUMN, vsendx);
                                                     temp.put(FIRST_COLUMN, wynikhome + " : "+ wynikguest);
                                                     list2.add(temp);
-                                                    final ListViewAdapterStats2 adapter = new ListViewAdapterStats2(ShowStats1Activity.this, list2);
+                                                    final ListViewAdapterButton3 adapter = new ListViewAdapterButton3(ShowStats1Activity.this, list2, teamname);
                                                     StatsListView.setAdapter(adapter);
                                                     adapter.notifyDataSetChanged();
                                                 }
