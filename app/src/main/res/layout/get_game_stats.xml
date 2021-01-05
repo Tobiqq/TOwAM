@@ -147,7 +147,7 @@
             android:layout_toEndOf="@+id/blocksum"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="T"
+            android:text="L"
             android:textColor="@color/green"
             android:textSize="30dp"></TextView>
 
@@ -303,7 +303,7 @@
             android:layout_toEndOf="@+id/block"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="T"
+            android:text="L"
             android:textColor="@color/green"
             android:textSize="30dp"></TextView>
 

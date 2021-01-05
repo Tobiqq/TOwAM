@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
 import com.example.basketballmanagerv3.Helpers.DisplayHelper;
-import com.example.basketballmanagerv3.Helpers.ListViewAdapterStats3;
 import com.example.basketballmanagerv3.Helpers.Player;
 
 import java.sql.ResultSet;
@@ -24,10 +23,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.example.basketballmanagerv3.Helpers.Constants.FIRST_COLUMN;
-import static com.example.basketballmanagerv3.Helpers.Constants.SECOND_COLUMN;
-import static com.example.basketballmanagerv3.Helpers.Constants.THIRD_COLUMN;
 
 public class TrackGameActivity extends AppCompatActivity {
 
@@ -49,6 +44,21 @@ public class TrackGameActivity extends AppCompatActivity {
     ListView text2;
     private ArrayList<HashMap<String, String>> list2;
     private ArrayList<HashMap<String, String>> list3;
+
+    String actionreboff = "Offensive Rebound";
+    String actionrebdeff = "Defensive Rebound";
+    String action2ptsin = "Made 2pt shot";
+    String action2pttry = "Miss 2pt shot";
+    String action3ptin = "Made 3pt shot";
+    String action3pttry = "Miss 3pt shot";
+    String actionfreein = "Made freethrow shot";
+    String actionfreetry = "Miss freethrow shot";
+    String actionasist = "Asist";
+    String actionloss = "Loss";
+    String actionsteal = "Steal";
+    String actionblock = "Block";
+
+
 
 
 
@@ -610,14 +620,13 @@ public class TrackGameActivity extends AppCompatActivity {
                                 listfirst.get(j).addreboundoff();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getreboff()));
                                 final int finalJ = j;
-
+                                final int temp0 = listfirst.get(j).getreboff();
                                 final DisplayHelper helper = new DisplayHelper();
-                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ);
-
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ, actionreboff, temp0);
                                 text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ);
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ, actionreboff, temp0);
                                     }
                                 });
                             }
@@ -627,28 +636,16 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).addreboundoff();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getreboff()));
-
-                                HashMap<String, String> temp = new HashMap<>();
-                                temp.put(FIRST_COLUMN, listsecond.get(k).getname());
-                                temp.put(THIRD_COLUMN, " - "+String.valueOf(listsecond.get(k).getreboff())+" - ");
-                                temp.put(SECOND_COLUMN, "Offensive Rebound");
-                                list3.add(temp);
-                                final ListViewAdapterStats3 adapter2 = new ListViewAdapterStats3(TrackGameActivity.this, list3);
-                                text2.setAdapter(adapter2);
-
                                 final int finalK = k;
+                                final int temp0 = listsecond.get(k).getreboff();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text2, list3, listsecond, finalK, actionreboff, temp0);
                                 text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                        listfirst.get(finalK).remreboundoff();
-                                        int licznik = adapter2.getCount();
-                                        adapter2.remove(licznik-1);
-                                        text2.setAdapter(adapter2);
-                                        adapter2.notifyDataSetChanged();
+                                        helper.delete(TrackGameActivity.this, text2, list3, listsecond, finalK, actionreboff, temp0);
                                     }
                                 });
-
-                                adapter2.notifyDataSetChanged();
                             }
                         }
                     }else{}
@@ -666,28 +663,16 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).addrebounddeff();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getrebdeff()));
-
-                                HashMap<String, String> temp = new HashMap<>();
-                                temp.put(FIRST_COLUMN, listfirst.get(j).getname());
-                                temp.put(THIRD_COLUMN, " - "+String.valueOf(listfirst.get(j).getrebdeff())+" - ");
-                                temp.put(SECOND_COLUMN, "Offensive Rebound");
-                                list2.add(temp);
-                                final ListViewAdapterStats3 adapter = new ListViewAdapterStats3(TrackGameActivity.this, list2);
-                                text.setAdapter(adapter);
-
                                 final int finalJ = j;
+                                final int temp0 = listfirst.get(j).getrebdeff();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ, actionrebdeff, temp0);
                                 text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                        listfirst.get(finalJ).remrebounddeff();
-                                        int licznik = adapter.getCount();
-                                        adapter.remove(licznik-1);
-                                        text.setAdapter(adapter);
-                                        adapter.notifyDataSetChanged();
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ, actionrebdeff, temp0);
                                     }
                                 });
-
-                                adapter.notifyDataSetChanged();
                             }
                         }
 
@@ -695,28 +680,16 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).addrebounddeff();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getrebdeff()));
-
-                                HashMap<String, String> temp = new HashMap<>();
-                                temp.put(FIRST_COLUMN, listsecond.get(k).getname());
-                                temp.put(THIRD_COLUMN, " - "+String.valueOf(listsecond.get(k).getrebdeff())+" - ");
-                                temp.put(SECOND_COLUMN, "Offensive Rebound");
-                                list3.add(temp);
-                                final ListViewAdapterStats3 adapter2 = new ListViewAdapterStats3(TrackGameActivity.this, list3);
-                                text2.setAdapter(adapter2);
-
                                 final int finalK = k;
+                                final int temp0 = listsecond.get(k).getrebdeff();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text2, list3, listsecond, finalK, actionrebdeff, temp0);
                                 text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                        listfirst.get(finalK).remrebounddeff();
-                                        int licznik = adapter2.getCount();
-                                        adapter2.remove(licznik-1);
-                                        text2.setAdapter(adapter2);
-                                        adapter2.notifyDataSetChanged();
+                                        helper.delete(TrackGameActivity.this, text2, list3, listsecond, finalK, actionrebdeff, temp0);
                                     }
                                 });
-
-                                adapter2.notifyDataSetChanged();
                             }
                         }
                     }else{}
@@ -736,12 +709,32 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).addsteal();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getsteal()));
+                                final int finalJ = j;
+                                final int temp0 = listfirst.get(j).getsteal();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ, actionsteal, temp0);
+                                text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ, actionsteal, temp0);
+                                    }
+                                });
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).addsteal();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getsteal()));
+                                final int finalK = k;
+                                final int temp0 = listsecond.get(k).getsteal();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text2, list3, listsecond, finalK, actionsteal, temp0);
+                                text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text2, list3, listsecond, finalK, actionsteal, temp0);
+                                    }
+                                });
                             }
                         }
                     }else{}
@@ -759,12 +752,32 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).addasist();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getasis()));
+                                final int finalJ = j;
+                                final int temp0 = listfirst.get(j).getasis();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ, actionasist, temp0);
+                                text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ, actionasist, temp0);
+                                    }
+                                });
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).addasist();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getasis()));
+                                final int finalK = k;
+                                final int temp0 = listsecond.get(k).getasis();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text2, list3, listsecond, finalK, actionasist, temp0);
+                                text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text2, list3, listsecond, finalK, actionasist, temp0);
+                                    }
+                                });
                             }
                         }
                     }else{}
@@ -782,12 +795,32 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).add2points();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).get2points()));
+                                final int finalJ = j;
+                                final int temp0 = listfirst.get(j).get2points();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ, action2ptsin, temp0);
+                                text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ, action2ptsin, temp0);
+                                    }
+                                });
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).add2points();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).get2points()));
+                                final int finalK = k;
+                                final int temp0 = listsecond.get(k).get2points();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text2, list3, listsecond, finalK, action2ptsin, temp0);
+                                text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text2, list3, listsecond, finalK, action2ptsin, temp0);
+                                    }
+                                });
                             }
                         }
                     }else{}
@@ -805,12 +838,32 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).add2pointstry();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).get2pointstry()));
+                                final int finalJ = j;
+                                final int temp0 = listfirst.get(j).get2pointstry();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ, action2pttry, temp0);
+                                text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ, action2pttry, temp0);
+                                    }
+                                });
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).add2pointstry();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).get2pointstry()));
+                                final int finalK = k;
+                                final int temp0 = listsecond.get(k).get2pointstry();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text2, list3, listsecond, finalK, action2pttry, temp0);
+                                text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text2, list3, listsecond, finalK, action2pttry, temp0);
+                                    }
+                                });
                             }
                         }
                     }else{}
@@ -828,12 +881,32 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).add3points();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).get3points()));
+                                final int finalJ = j;
+                                final int temp0 = listfirst.get(j).get3points();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ, action3ptin, temp0);
+                                text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ, action3ptin, temp0);
+                                    }
+                                });
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).add3points();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).get3points()));
+                                final int finalK = k;
+                                final int temp0 = listsecond.get(k).get3points();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text2, list3, listsecond, finalK, action3ptin, temp0);
+                                text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text2, list3, listsecond, finalK, action3ptin, temp0);
+                                    }
+                                });
                             }
                         }
                     }else{}
@@ -851,12 +924,32 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).add3pointstry();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).get3pointstry()));
+                                final int finalJ = j;
+                                final int temp0 = listfirst.get(j).get3pointstry();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ, action3pttry, temp0);
+                                text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ, action3pttry, temp0);
+                                    }
+                                });
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).add3pointstry();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).get3pointstry()));
+                                final int finalK = k;
+                                final int temp0 = listsecond.get(k).get3pointstry();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text2, list3, listsecond, finalK, action3pttry, temp0);
+                                text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text2, list3, listsecond, finalK, action3pttry, temp0);
+                                    }
+                                });
                             }
                         }
                     }else{}
@@ -864,22 +957,42 @@ public class TrackGameActivity extends AppCompatActivity {
             }
         });
 
-        Button turnover = findViewById(R.id.Turnover);
-        turnover.setOnClickListener(new View.OnClickListener() {
+        Button bloss = findViewById(R.id.Loss);
+        bloss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < tabButtons2.size(); i++){
                     if(tabButtons2.get(i).isSelected() == true){
                         for (int j = 0; j < listfirst.size(); j++){
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
-                                listfirst.get(j).addto();
-                                Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getto()));
+                                listfirst.get(j).addloss();
+                                Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getloss()));
+                                final int finalJ = j;
+                                final int temp0 = listfirst.get(j).getloss();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ, actionloss, temp0);
+                                text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ, actionloss, temp0);
+                                    }
+                                });
                             }
                         }
                         for (int k = 0; k < listsecond.size(); k++){
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
-                                listsecond.get(k).addto();
-                                Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getto()));
+                                listsecond.get(k).addloss();
+                                Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getloss()));
+                                final int finalK = k;
+                                final int temp0 = listsecond.get(k).getloss();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text2, list3, listsecond, finalK, actionloss, temp0);
+                                text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text2, list3, listsecond, finalK, actionloss, temp0);
+                                    }
+                                });
                             }
                         }
                     }else{}
@@ -897,6 +1010,16 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).getblock();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getblock()));
+                                final int finalJ = j;
+                                final int temp0 = listfirst.get(j).getblock();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ, actionblock, temp0);
+                                text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ, actionblock, temp0);
+                                    }
+                                });
                             }
                         }
 
@@ -904,6 +1027,16 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).getblock();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getblock()));
+                                final int finalK = k;
+                                final int temp0 = listsecond.get(k).getblock();
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text2, list3, listsecond, finalK, actionblock, temp0);
+                                text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text2, list3, listsecond, finalK, actionblock, temp0);
+                                    }
+                                });
                             }
                         }
                     }else{}
@@ -920,7 +1053,7 @@ public class TrackGameActivity extends AppCompatActivity {
         final int[] rebdeff = new int[1];
         final int[] asist = new int[1];
         final int[] steal = new int[1];
-        final int[] to = new int[1];
+        final int[] loss = new int[1];
 
         final Button endtracking = findViewById(R.id.End_Tracking);
         endtracking.setOnClickListener(new View.OnClickListener() {
@@ -936,7 +1069,7 @@ public class TrackGameActivity extends AppCompatActivity {
                         rebdeff[0] = listfirst.get(i).getrebdeff();
                         asist[0] = listfirst.get(i).getasis();
                         steal[0] = listfirst.get(i).getsteal();
-                        to[0] = listfirst.get(i).getto();
+                        loss[0] = listfirst.get(i).getloss();
                     }
                     if(i >= listfirst.size()){
                         i=i+1;
@@ -948,7 +1081,7 @@ public class TrackGameActivity extends AppCompatActivity {
                         rebdeff[0] = listsecond.get(i-listsecond.size()).getrebdeff();
                         asist[0] = listsecond.get(i-listsecond.size()).getasis();
                         steal[0] = listsecond.get(i-listsecond.size()).getsteal();
-                        to[0] = listsecond.get(i-listsecond.size()).getto();
+                        loss[0] = listsecond.get(i-listsecond.size()).getloss();
                         i=i-1;
                     }
 
@@ -984,8 +1117,8 @@ public class TrackGameActivity extends AppCompatActivity {
                                 idstatscount = idstats.getInt("total");
                                 idstatscount += 1;
                                 statement4.executeUpdate("SET IDENTITY_INSERT Match_stats ON");
-                                statement4.executeUpdate("INSERT INTO Match_stats (id_stats, id_game, id_player, Two_points_made, Two_points_try, Three_points_made, Three_points_try, Free_points_made, Free_points_try, Rebounds_off, Rebounds_def, Steals, Blocks, Turnovers, Fouls)" +
-                                        "VALUES('"+idstatscount+"','"+idgame+"','" +idplayer.get(i)+"','"+twopointsin[0]+"','"+twopointstry[0]+"','"+threepointstry[0]+"','"+threepointstry[0]+"','0','0','"+rebdeff[0]+"','"+rebdeff[0]+"','"+steal[0]+"','0','"+to[0]+"','0')");
+                                statement4.executeUpdate("INSERT INTO Match_stats (id_stats, id_game, id_player, Two_points_made, Two_points_try, Three_points_made, Three_points_try, Free_points_made, Free_points_try, Rebounds_off, Rebounds_def, Steals, Blocks, Loss, Fouls)" +
+                                        "VALUES('"+idstatscount+"','"+idgame+"','" +idplayer.get(i)+"','"+twopointsin[0]+"','"+twopointstry[0]+"','"+threepointstry[0]+"','"+threepointstry[0]+"','0','0','"+rebdeff[0]+"','"+rebdeff[0]+"','"+steal[0]+"','0','"+loss[0]+"','0')");
                                 statement4.executeUpdate("UPDATE Games SET game_state = '0' WHERE id_game = '"+idgame+"'");
                             }
                         } catch (SQLException throwables) {

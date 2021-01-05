@@ -581,7 +581,7 @@
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/Turnover"
+            android:id="@+id/Loss"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
@@ -591,7 +591,7 @@
             android:layout_marginBottom="10dp"
             android:layout_toEndOf="@+id/Steal"
             android:background="@drawable/rounded_corners"
-            android:text="Turn over"
+            android:text="Loss"
             android:textSize="20dp" />
 
         <Button
@@ -603,7 +603,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_toEndOf="@+id/Turnover"
+            android:layout_toEndOf="@+id/Loss"
             android:background="@drawable/rounded_corners"
             android:text="Block"
             android:textSize="20dp" />

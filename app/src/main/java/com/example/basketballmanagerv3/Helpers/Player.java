@@ -13,7 +13,7 @@ public class Player {
     int asis = 0;
     int block = 0;
     int steal = 0;
-    int to = 0;
+    int loss = 0;
 
     public Player() {
 
@@ -81,8 +81,8 @@ public class Player {
         points3try += 1;
     }
 
-    public void addto(){
-        to += 1;
+    public void addloss(){
+        loss += 1;
     }
 
     public String getname(){
@@ -116,8 +116,8 @@ public class Player {
     public int get3pointstry(){
         return points3try;
     }
-    public int getto(){
-        return to;
+    public int getloss(){
+        return loss;
     }
     public int getblock(){
         return block;
@@ -159,7 +159,7 @@ public class Player {
         points3try -= 1;
     }
 
-    public void remto(){
-        to -= 1;
+    public void remloss(){
+        loss -= 1;
     }
 }

@@ -177,7 +177,7 @@ public class ShowStats2Activity extends AppCompatActivity {
                     reba = result.getInt("Rebounds_def");
                     steal = result.getInt("Steals");
                     block = result.getInt("Blocks");
-                    turn = result.getInt("Turnovers");
+                    turn = result.getInt("Loss");
                     fouls = result.getInt("Fouls");
 
                     int two = twoptsmade+twoptstry;
@@ -245,7 +245,7 @@ public class ShowStats2Activity extends AppCompatActivity {
                     reba = result2.getInt("Rebounds_def");
                     steal = result2.getInt("Steals");
                     block = result2.getInt("Blocks");
-                    turn = result2.getInt("Turnovers");
+                    turn = result2.getInt("Loss");
                     fouls = result2.getInt("Fouls");
 
                     int two = twoptsmade+twoptstry;
@@ -263,7 +263,7 @@ public class ShowStats2Activity extends AppCompatActivity {
                     sumfouls2 += fouls;
 
                     pkt = twoptsmade*2 + threeptsmade*3 + freeptsmade;
-                    eval = twoptsmade + threeptsmade + freeptsmade + block + turn + reba + rebo + steal - (twoptstry+threeptstry+freeptstry+fouls);
+                    eval = twoptsmade + threeptsmade + freeptsmade + block + reba + rebo + steal - (twoptstry+threeptstry+freeptstry+fouls+turn);
 
                     sumpkt2 += pkt;
                     sumeval2 += eval;

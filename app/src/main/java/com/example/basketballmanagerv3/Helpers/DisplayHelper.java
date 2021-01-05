@@ -21,31 +21,36 @@ public class DisplayHelper {
     private ArrayList<HashMap<String, String>> list2;
     List<Player> listfirst;
     int j;
+    String action;
+    int rodzaj;
 
-    public void show(Activity activity, ListView text, ArrayList<HashMap<String, String>> list2, List<Player> listfirst, int j){
+    public void show(Activity activity, ListView text, ArrayList<HashMap<String, String>> list2, List<Player> listfirst, int j, String action, int rodzaj){
 
         this.text = text;
         this.list2 = list2;
         this.listfirst = listfirst;
         this.j = j;
         this.activity = activity;
+        this.action = action;
+        this.rodzaj = rodzaj;
 
         HashMap<String, String> temp = new HashMap<>();
         temp.put(FIRST_COLUMN, listfirst.get(j).getname());
-        temp.put(THIRD_COLUMN, " - "+String.valueOf(listfirst.get(j).getreboff())+" - ");
-        temp.put(SECOND_COLUMN, "Offensive Rebound");
+        temp.put(THIRD_COLUMN, " - "+String.valueOf(rodzaj)+" - ");
+        temp.put(SECOND_COLUMN, action);
         list2.add(temp);
         final ListViewAdapterStats3 adapter = new ListViewAdapterStats3(activity, list2);
         text.setAdapter(adapter);
     }
 
-    public void delete(Activity activity, ListView text, ArrayList<HashMap<String, String>> list2, List<Player> listfirst, int j){
+    public void delete(Activity activity, ListView text, ArrayList<HashMap<String, String>> list2, List<Player> listfirst, int j, String action, int rodzaj){
 
         this.text = text;
         this.list2 = list2;
         this.listfirst = listfirst;
         this.j = j;
         this.activity = activity;
+        this.action = action;
 
         final ListViewAdapterStats3 adapter = new ListViewAdapterStats3(activity, list2);
         listfirst.get(j).remreboundoff();

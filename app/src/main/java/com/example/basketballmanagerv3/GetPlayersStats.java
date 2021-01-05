@@ -127,7 +127,7 @@ public class GetPlayersStats extends AppCompatActivity {
                     reba = result.getInt("Rebounds_def");
                     steal = result.getInt("Steals");
                     block = result.getInt("Blocks");
-                    turn = result.getInt("Turnovers");
+                    turn = result.getInt("Loss");
                     fouls = result.getInt("Fouls");
 
                     int two = twoptsmade+twoptstry;
@@ -135,7 +135,7 @@ public class GetPlayersStats extends AppCompatActivity {
                     int one = freeptsmade+freeptstry;
 
                     pkt = twoptsmade*2 + threeptsmade*3 + freeptsmade;
-                    eval = twoptsmade + threeptsmade + freeptsmade + block + turn + reba + rebo + steal - (twoptstry+threeptstry+freeptstry+fouls);
+                    eval = twoptsmade + threeptsmade + freeptsmade + block + reba + rebo + steal - (twoptstry+threeptstry+freeptstry+fouls+turn);
 
                     HashMap<String, String> temp = new HashMap<>();
                     temp.put(FIRST_COLUMN, vsendx);
