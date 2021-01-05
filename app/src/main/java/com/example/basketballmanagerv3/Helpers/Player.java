@@ -119,4 +119,47 @@ public class Player {
     public int getto(){
         return to;
     }
+    public int getblock(){
+        return block;
+    }
+
+    public void remrebounddeff(){
+        rebdeff -= 1;
+    }
+
+    public void remreboundoff(){
+        reboff -= 1;
+    }
+
+    public void remsteal(){
+        steal -= 1;
+    }
+
+    public void remblock(){
+        block -= 1;
+    }
+
+    public void remasist(){
+        asis -= 1;
+    }
+
+    public void rem2points(){
+        points2 -= 1;
+    }
+
+    public void rem3points(){
+        points3 -= 1;
+    }
+
+    public void rem2pointstry(){
+        points2try -= 1;
+    }
+
+    public void rem3pointstry(){
+        points3try -= 1;
+    }
+
+    public void remto(){
+        to -= 1;
+    }
 }

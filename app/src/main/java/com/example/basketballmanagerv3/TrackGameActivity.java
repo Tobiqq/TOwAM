@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,13 +14,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.basketballmanagerv3.Helpers.ConnectionsClass;
+import com.example.basketballmanagerv3.Helpers.DisplayHelper;
+import com.example.basketballmanagerv3.Helpers.ListViewAdapterStats3;
 import com.example.basketballmanagerv3.Helpers.Player;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import static com.example.basketballmanagerv3.Helpers.Constants.FIRST_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.SECOND_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.THIRD_COLUMN;
 
 public class TrackGameActivity extends AppCompatActivity {
 
@@ -37,6 +45,12 @@ public class TrackGameActivity extends AppCompatActivity {
     List<Player> listsecond = new ArrayList<>();
     List<Player> listfirst = new ArrayList<>();
     List<Button> tabButtons2 = new ArrayList<>();
+    ListView text;
+    ListView text2;
+    private ArrayList<HashMap<String, String>> list2;
+    private ArrayList<HashMap<String, String>> list3;
+
+
 
 
     @Override
@@ -102,6 +116,10 @@ public class TrackGameActivity extends AppCompatActivity {
         tab = new String[25];
         tab2 = new String[25];
 
+        text = findViewById(R.id.listView4);
+        text2 = findViewById(R.id.listView5);
+        list2 = new ArrayList<>();
+        list3 = new ArrayList<>();
 
 
 
@@ -591,6 +609,17 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).addreboundoff();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getreboff()));
+                                final int finalJ = j;
+
+                                final DisplayHelper helper = new DisplayHelper();
+                                helper.show(TrackGameActivity.this, text, list2, listfirst, finalJ);
+
+                                text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        helper.delete(TrackGameActivity.this, text, list2, listfirst, finalJ);
+                                    }
+                                });
                             }
                         }
 
@@ -598,6 +627,28 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).addreboundoff();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getreboff()));
+
+                                HashMap<String, String> temp = new HashMap<>();
+                                temp.put(FIRST_COLUMN, listsecond.get(k).getname());
+                                temp.put(THIRD_COLUMN, " - "+String.valueOf(listsecond.get(k).getreboff())+" - ");
+                                temp.put(SECOND_COLUMN, "Offensive Rebound");
+                                list3.add(temp);
+                                final ListViewAdapterStats3 adapter2 = new ListViewAdapterStats3(TrackGameActivity.this, list3);
+                                text2.setAdapter(adapter2);
+
+                                final int finalK = k;
+                                text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        listfirst.get(finalK).remreboundoff();
+                                        int licznik = adapter2.getCount();
+                                        adapter2.remove(licznik-1);
+                                        text2.setAdapter(adapter2);
+                                        adapter2.notifyDataSetChanged();
+                                    }
+                                });
+
+                                adapter2.notifyDataSetChanged();
                             }
                         }
                     }else{}
@@ -615,6 +666,28 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
                                 listfirst.get(j).addrebounddeff();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getrebdeff()));
+
+                                HashMap<String, String> temp = new HashMap<>();
+                                temp.put(FIRST_COLUMN, listfirst.get(j).getname());
+                                temp.put(THIRD_COLUMN, " - "+String.valueOf(listfirst.get(j).getrebdeff())+" - ");
+                                temp.put(SECOND_COLUMN, "Offensive Rebound");
+                                list2.add(temp);
+                                final ListViewAdapterStats3 adapter = new ListViewAdapterStats3(TrackGameActivity.this, list2);
+                                text.setAdapter(adapter);
+
+                                final int finalJ = j;
+                                text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        listfirst.get(finalJ).remrebounddeff();
+                                        int licznik = adapter.getCount();
+                                        adapter.remove(licznik-1);
+                                        text.setAdapter(adapter);
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                });
+
+                                adapter.notifyDataSetChanged();
                             }
                         }
 
@@ -622,6 +695,28 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).addrebounddeff();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getrebdeff()));
+
+                                HashMap<String, String> temp = new HashMap<>();
+                                temp.put(FIRST_COLUMN, listsecond.get(k).getname());
+                                temp.put(THIRD_COLUMN, " - "+String.valueOf(listsecond.get(k).getrebdeff())+" - ");
+                                temp.put(SECOND_COLUMN, "Offensive Rebound");
+                                list3.add(temp);
+                                final ListViewAdapterStats3 adapter2 = new ListViewAdapterStats3(TrackGameActivity.this, list3);
+                                text2.setAdapter(adapter2);
+
+                                final int finalK = k;
+                                text2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        listfirst.get(finalK).remrebounddeff();
+                                        int licznik = adapter2.getCount();
+                                        adapter2.remove(licznik-1);
+                                        text2.setAdapter(adapter2);
+                                        adapter2.notifyDataSetChanged();
+                                    }
+                                });
+
+                                adapter2.notifyDataSetChanged();
                             }
                         }
                     }else{}
@@ -785,6 +880,30 @@ public class TrackGameActivity extends AppCompatActivity {
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
                                 listsecond.get(k).addto();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getto()));
+                            }
+                        }
+                    }else{}
+                }
+            }
+        });
+
+        Button bBlo = findViewById(R.id.Block);
+        bBlo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < tabButtons2.size(); i++){
+                    if(tabButtons2.get(i).isSelected() == true){
+                        for (int j = 0; j < listfirst.size(); j++){
+                            if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
+                                listfirst.get(j).getblock();
+                                Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getblock()));
+                            }
+                        }
+
+                        for (int k = 0; k < listsecond.size(); k++){
+                            if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
+                                listsecond.get(k).getblock();
+                                Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getblock()));
                             }
                         }
                     }else{}
