@@ -54,6 +54,53 @@
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="@color/green3"
         android:textSize="30dp" />-->
+    <Button
+        android:id="@+id/one"
+        android:layout_width="200dp"
+        android:layout_height="74dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginBottom="370dp"
+        android:background="@drawable/rounded_corners"
+        android:text="1 League"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/two"
+        android:layout_width="200dp"
+        android:layout_height="74dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="400dp"
+        android:layout_marginBottom="370dp"
+        android:background="@drawable/rounded_corners"
+        android:text="2 League"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/three"
+        android:layout_width="200dp"
+        android:layout_height="74dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="650dp"
+        android:layout_marginBottom="370dp"
+        android:background="@drawable/rounded_corners"
+        android:text="3 League"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/four"
+        android:layout_width="200dp"
+        android:layout_height="74dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="900dp"
+        android:layout_marginBottom="370dp"
+        android:background="@drawable/rounded_corners"
+        android:text="Amateur"
+        android:textSize="30dp" />
 
     <Spinner
         android:id="@+id/hostteamname"
@@ -65,7 +112,7 @@
         android:layout_marginStart="230dp"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="240dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginBottom="270dp"
         android:popupBackground="@color/layout2"
         android:background="@color/layout2"
         android:outlineSpotShadowColor="@color/green"
@@ -83,7 +130,7 @@
         android:layout_marginStart="230dp"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="240dp"
-        android:layout_marginBottom="270dp"
+        android:layout_marginBottom="180dp"
         android:popupBackground="@color/layout2"
         android:background="@color/layout2"
         android:outlineSpotShadowColor="@color/green"
