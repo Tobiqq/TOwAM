@@ -18,12 +18,14 @@ import java.util.HashMap;
 
 import static com.example.basketballmanagerv3.Helpers.Constants.FIRST_COLUMN;
 import static com.example.basketballmanagerv3.Helpers.Constants.SECOND_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.THIRD_COLUMN;
 
 public class ShowStats1Activity extends AppCompatActivity {
 
     ListView StatsListView;
     private ArrayList<HashMap<String, String>> list2;
     int temp;
+    String temp2;
     int temp2guest;
     int temp2home;
     int temp3guest;
@@ -73,6 +75,7 @@ public class ShowStats1Activity extends AppCompatActivity {
             Statement statement9 = null;
             Statement statement10 = null;
             Statement statement11 = null;
+            Statement statement12 = null;
             try {
                 statement = conect.CONN().createStatement();
                 statement2 = conect.CONN().createStatement();
@@ -85,10 +88,12 @@ public class ShowStats1Activity extends AppCompatActivity {
                 statement9 = conect.CONN().createStatement();
                 statement10 = conect.CONN().createStatement();
                 statement11 = conect.CONN().createStatement();
+                statement12 = conect.CONN().createStatement();
 
-                ResultSet result = statement.executeQuery("SELECT id_game AS Total_id FROM Games WHERE game_state = '0' AND id_team_home = (SELECT id_team FROM Teams WHERE teamname = '"+teamname+"') OR game_state = '0' AND id_team_guest = (SELECT id_team FROM Teams WHERE teamname = '"+teamname+"')");
+                ResultSet result = statement.executeQuery("SELECT id_game, game_date FROM Games WHERE game_state = '0' AND id_team_home = (SELECT id_team FROM Teams WHERE teamname = '"+teamname+"') OR game_state = '0' AND id_team_guest = (SELECT id_team FROM Teams WHERE teamname = '"+teamname+"')");
                 while(result.next()){
-                    temp = result.getInt("Total_id");
+                    temp = result.getInt("id_game");
+                    temp2 = result.getString("game_date");
 
                     ResultSet result3 = statement3.executeQuery("SELECT id_team_home, id_team_guest FROM Games WHERE id_game ='"+temp+"'");
                     while(result3.next()) {
@@ -134,8 +139,9 @@ public class ShowStats1Activity extends AppCompatActivity {
                                                     HashMap<String, String> temp = new HashMap<>();
                                                     temp.put(SECOND_COLUMN, vsendx);
                                                     temp.put(FIRST_COLUMN, wynikhome + " : "+ wynikguest);
+                                                    temp.put(THIRD_COLUMN, temp2);
                                                     list2.add(temp);
-                                                    final ListViewAdapterButton3 adapter = new ListViewAdapterButton3(ShowStats1Activity.this, list2, teamname);
+                                                    final ListViewAdapterButton3 adapter = new ListViewAdapterButton3(ShowStats1Activity.this, list2, teamname, temp2);
                                                     StatsListView.setAdapter(adapter);
                                                     adapter.notifyDataSetChanged();
                                                 }
@@ -179,8 +185,9 @@ public class ShowStats1Activity extends AppCompatActivity {
                                                     HashMap<String, String> temp = new HashMap<>();
                                                     temp.put(SECOND_COLUMN, vsendx);
                                                     temp.put(FIRST_COLUMN, wynikhome + " : "+ wynikguest);
+                                                    temp.put(THIRD_COLUMN, temp2);
                                                     list2.add(temp);
-                                                    final ListViewAdapterButton3 adapter = new ListViewAdapterButton3(ShowStats1Activity.this, list2, teamname);
+                                                    final ListViewAdapterButton3 adapter = new ListViewAdapterButton3(ShowStats1Activity.this, list2, teamname, temp2);
                                                     StatsListView.setAdapter(adapter);
                                                     adapter.notifyDataSetChanged();
                                                 }

@@ -26,7 +26,7 @@
         <!--        android:entries="@array/sections" -->
         ></ListView>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -38,7 +38,7 @@
 
         <TextView
             android:id="@+id/FirstText2"
-            android:layout_width="0dp"
+            android:layout_width="350dp"
             android:layout_height="80dp"
             android:layout_weight="1"
             android:text="Host Team Name"
@@ -48,23 +48,36 @@
 
         <TextView
             android:id="@+id/SecondText2"
-            android:layout_width="0dp"
+            android:layout_width="350dp"
             android:layout_height="80dp"
             android:layout_weight="1"
             android:text="Guest Team Name"
+            android:layout_toEndOf="@+id/FirstText2"
             android:gravity="center"
             android:textColor="@color/green"
             android:textSize="30dp"></TextView>
 
         <TextView
             android:id="@+id/ThirdText2"
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="80dp"
             android:layout_weight="1"
-            android:text="Settings"
+            android:text="Date"
+            android:layout_toEndOf="@+id/SecondText2"
             android:gravity="center"
             android:textColor="@color/green"
             android:textSize="30dp"></TextView>
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/FourText2"
+            android:layout_width="350dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Settings"
+            android:layout_toEndOf="@+id/ThirdText2"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
+    </RelativeLayout>
 
 </RelativeLayout>

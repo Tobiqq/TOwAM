@@ -12,7 +12,7 @@
 
     <TextView
         android:id="@+id/FirstText"
-        android:layout_width="426dp"
+        android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/SecondText"
-        android:layout_width="426dp"
+        android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -32,7 +32,17 @@
 
     <TextView
         android:id="@+id/ThirdText"
-        android:layout_width="121dp"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="data"
+        android:textColor="@color/green"
+        android:textSize="30dp"></TextView>
+
+    <TextView
+        android:id="@+id/FourText"
+        android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_weight="1"
         android:gravity="center"

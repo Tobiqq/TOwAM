@@ -20,9 +20,12 @@ import com.example.basketballmanagerv3.Helpers.Player;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class TrackGameActivity extends AppCompatActivity {
 
@@ -1120,6 +1123,8 @@ public class TrackGameActivity extends AppCompatActivity {
                                 statement4.executeUpdate("INSERT INTO Match_stats (id_stats, id_game, id_player, Two_points_made, Two_points_try, Three_points_made, Three_points_try, Free_points_made, Free_points_try, Rebounds_off, Rebounds_def, Steals, Blocks, Loss, Fouls)" +
                                         "VALUES('"+idstatscount+"','"+idgame+"','" +idplayer.get(i)+"','"+twopointsin[0]+"','"+twopointstry[0]+"','"+threepointstry[0]+"','"+threepointstry[0]+"','0','0','"+rebdeff[0]+"','"+rebdeff[0]+"','"+steal[0]+"','0','"+loss[0]+"','0')");
                                 statement4.executeUpdate("UPDATE Games SET game_state = '0' WHERE id_game = '"+idgame+"'");
+                                String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                                statement4.executeUpdate("UPDATE Games SET game_date ='"+currentDate+"' WHERE id_game ='"+idgame+"'");
                             }
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();

@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 import static com.example.basketballmanagerv3.Helpers.Constants.FIRST_COLUMN;
 import static com.example.basketballmanagerv3.Helpers.Constants.SECOND_COLUMN;
+import static com.example.basketballmanagerv3.Helpers.Constants.THIRD_COLUMN;
 
 
 public class GamesEndedActivity extends AppCompatActivity {
@@ -43,6 +44,7 @@ public class GamesEndedActivity extends AppCompatActivity {
         final ConnectionsClass conect = new ConnectionsClass();
         int team1 = 0;
         int team2 = 0;
+        String data = null;
         String team1str = null;
         String team2str = null;
         if(conect.CONN() != null){
@@ -58,6 +60,7 @@ public class GamesEndedActivity extends AppCompatActivity {
                     IdListGames.add(result.getString("id_game"));
                     team1 = result.getInt("id_team_home");
                     team2 = result.getInt("id_team_guest");
+                    data = result.getString("game_date");
                     ResultSet result2 = statement2.executeQuery("SELECT teamname FROM Teams WHERE id_team='"+team1+"'");
                     while (result2.next()) {
                         team1str = result2.getString(1);
@@ -69,8 +72,9 @@ public class GamesEndedActivity extends AppCompatActivity {
                     HashMap<String, String> temp = new HashMap<>();
                     temp.put(FIRST_COLUMN, team1str);
                     temp.put(SECOND_COLUMN, team2str);
+                    temp.put(THIRD_COLUMN, data);
                     list.add(temp);
-                    final ListViewAdapterButton2 adapter2 = new ListViewAdapterButton2(this, list);
+                    final ListViewAdapterButton2 adapter2 = new ListViewAdapterButton2(this, list, data);
                     GameListView2.setAdapter(adapter2);
                     adapter2.notifyDataSetChanged();
                 }

@@ -30,6 +30,21 @@
             android:text="      Team Name"
             android:textColor="@color/green"
             android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/data"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="900dp"
+            android:layout_marginEnd="100dp"
+            android:layout_toEndOf="@+id/team_name"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Data"
+            android:textColor="@color/green"
+            android:textSize="30dp"></TextView>
     </RelativeLayout>
 
     <RelativeLayout

@@ -61,6 +61,7 @@ public class ShowStats2Activity extends AppCompatActivity {
     TextView evalt2;
 
 
+
     private ArrayList<HashMap<String, String>> list2;
     private ArrayList<HashMap<String, String>> list3;
 
@@ -106,12 +107,16 @@ public class ShowStats2Activity extends AppCompatActivity {
         Intent in = getIntent();
         final String teamname1 = in.getStringExtra("team1");
         final String teamname2 = in.getStringExtra("team2");
+        final String data = in.getStringExtra("data");
 
         TextView team = findViewById(R.id.team_name);
         team.setText("              " + teamname1);
 
         TextView player = findViewById(R.id.team_name2);
         player.setText("              " + teamname2);
+
+        TextView dataa = findViewById(R.id.data);
+        dataa.setText(data);
 
 
 
