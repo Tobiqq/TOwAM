@@ -93,69 +93,72 @@ public class GetPlayersStats extends AppCompatActivity {
                 statement3 = conect.CONN().createStatement();
                 statement4 = conect.CONN().createStatement();
                 statement5 = conect.CONN().createStatement();
-                ResultSet result2 = statement5.executeQuery("SELECT id_team_home, id_team_guest FROM Games WHERE id_game = (SELECT id_game FROM Match_stats WHERE id_player = (SELECT id_player FROM Players WHERE player_name = '"+name+"'))");
+                //ResultSet result2 = statement5.executeQuery("SELECT id_team_home, id_team_guest FROM Games WHERE id_game = (SELECT id_game FROM Match_stats WHERE id_player = (SELECT id_player FROM Players WHERE player_name = '"+name+"'))");
+                ResultSet result2 = statement5.executeQuery("SELECT * FROM Match_stats LEFT JOIN Games G_game on G_game.id_game = Match_stats.id_game where id_player = (SELECT id_player FROM Players WHERE player_name = '"+name+"')");
                 while(result2.next()) {
                     vs = result2.getInt("id_team_home");
                     vstwo = result2.getInt("id_team_guest");
-                }
-                ResultSet result3 = statement2.executeQuery("SELECT id_team FROM Teams WHERE teamname = '"+teamname+"'");
-                while(result3.next()) {
-                    vscomp = result3.getInt("id_team");
-                }
-                if(vs == vscomp)
-                {
-                    ResultSet result4 = statement3.executeQuery("SELECT teamname FROM Teams WHERE id_team = '"+vstwo+"'");
-                    while(result4.next()) {
-                        vsendx = result4.getString("teamname");
+
+                    ResultSet result3 = statement2.executeQuery("SELECT id_team FROM Teams WHERE teamname = '"+teamname+"'");
+                    while(result3.next()) {
+                        vscomp = result3.getInt("id_team");
                     }
-                }else {
-                    ResultSet result5 = statement4.executeQuery("SELECT teamname FROM Teams WHERE id_team = '"+vs+"'");
-                    while(result5.next()) {
-                        vsendx = result5.getString("teamname");
+                    if(vs == vscomp)
+                    {
+                        ResultSet result4 = statement3.executeQuery("SELECT teamname FROM Teams WHERE id_team = '"+vstwo+"'");
+                        while(result4.next()) {
+                            vsendx = result4.getString("teamname");
+                        }
+                    }else {
+                        ResultSet result5 = statement4.executeQuery("SELECT teamname FROM Teams WHERE id_team = '"+vs+"'");
+                        while(result5.next()) {
+                            vsendx = result5.getString("teamname");
+                        }
+                    }
+
+                    ResultSet result = statement.executeQuery("SELECT * FROM Match_stats LEFT JOIN Games G_game on G_game.id_game = Match_stats.id_game where id_player = (SELECT id_player FROM Players WHERE player_name = '"+name+"') AND id_team_home = '"+vs+"' AND id_team_guest = "+vstwo+"");
+                    while(result.next()){
+                        twoptsmade = result.getInt("Two_points_made");
+                        twoptstry = result.getInt("Two_points_try");
+                        threeptsmade = result.getInt("Three_points_made");
+                        threeptstry = result.getInt("Three_points_try");
+                        freeptsmade = result.getInt("Free_points_made");
+                        freeptstry = result.getInt("Free_points_try");
+                        rebo = result.getInt("Rebounds_off");
+                        reba = result.getInt("Rebounds_def");
+                        steal = result.getInt("Steals");
+                        block = result.getInt("Blocks");
+                        turn = result.getInt("Loss");
+                        fouls = result.getInt("Fouls");
+
+                        int two = twoptsmade+twoptstry;
+                        int three = threeptsmade+threeptstry;
+                        int one = freeptsmade+freeptstry;
+
+                        pkt = twoptsmade*2 + threeptsmade*3 + freeptsmade;
+                        eval = twoptsmade + threeptsmade + freeptsmade + block + reba + rebo + steal - (twoptstry+threeptstry+freeptstry+fouls+turn);
+
+                        HashMap<String, String> temp = new HashMap<>();
+                        temp.put(FIRST_COLUMN, vsendx);
+                        temp.put(SECOND_COLUMN, twoptsmade + "/" + two);
+                        temp.put(THIRD_COLUMN, threeptsmade + "/" + three);
+                        temp.put(FOURTH_COLUMN, freeptsmade + "/" + one);
+                        temp.put(FIFTH_COLUMN, rebo + "");
+                        temp.put(SIXTH_COLUMN, reba + "");
+                        temp.put(SEVENTH_COLUMN, steal + "");
+                        temp.put(EIGHTH_COLUMN, block + "");
+                        temp.put(NINETH_COLUMN, turn + "");
+                        temp.put(TENTH_COLUMN, fouls + "");
+                        temp.put(ELEVENTH_COLUMN, pkt + "");
+                        temp.put(TWELWETH_COLUMN, eval + "");
+
+                        list2.add(temp);
+                        final ListViewAdapterStats adapter = new ListViewAdapterStats(GetPlayersStats.this, list2);
+                        StatsListView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                     }
                 }
 
-                ResultSet result = statement.executeQuery("SELECT * FROM Match_stats WHERE id_player = (SELECT id_player FROM Players WHERE player_name = '"+name+"')");
-                while(result.next()){
-                    twoptsmade = result.getInt("Two_points_made");
-                    twoptstry = result.getInt("Two_points_try");
-                    threeptsmade = result.getInt("Three_points_made");
-                    threeptstry = result.getInt("Three_points_try");
-                    freeptsmade = result.getInt("Free_points_made");
-                    freeptstry = result.getInt("Free_points_try");
-                    rebo = result.getInt("Rebounds_off");
-                    reba = result.getInt("Rebounds_def");
-                    steal = result.getInt("Steals");
-                    block = result.getInt("Blocks");
-                    turn = result.getInt("Loss");
-                    fouls = result.getInt("Fouls");
-
-                    int two = twoptsmade+twoptstry;
-                    int three = threeptsmade+threeptstry;
-                    int one = freeptsmade+freeptstry;
-
-                    pkt = twoptsmade*2 + threeptsmade*3 + freeptsmade;
-                    eval = twoptsmade + threeptsmade + freeptsmade + block + reba + rebo + steal - (twoptstry+threeptstry+freeptstry+fouls+turn);
-
-                    HashMap<String, String> temp = new HashMap<>();
-                    temp.put(FIRST_COLUMN, vsendx);
-                    temp.put(SECOND_COLUMN, twoptsmade + "/" + two);
-                    temp.put(THIRD_COLUMN, threeptsmade + "/" + three);
-                    temp.put(FOURTH_COLUMN, freeptsmade + "/" + one);
-                    temp.put(FIFTH_COLUMN, rebo + "");
-                    temp.put(SIXTH_COLUMN, reba + "");
-                    temp.put(SEVENTH_COLUMN, steal + "");
-                    temp.put(EIGHTH_COLUMN, block + "");
-                    temp.put(NINETH_COLUMN, turn + "");
-                    temp.put(TENTH_COLUMN, fouls + "");
-                    temp.put(ELEVENTH_COLUMN, pkt + "");
-                    temp.put(TWELWETH_COLUMN, eval + "");
-
-                    list2.add(temp);
-                    final ListViewAdapterStats adapter = new ListViewAdapterStats(GetPlayersStats.this, list2);
-                    StatsListView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

@@ -1011,7 +1011,7 @@ public class TrackGameActivity extends AppCompatActivity {
                     if(tabButtons2.get(i).isSelected() == true){
                         for (int j = 0; j < listfirst.size(); j++){
                             if(listfirst.get(j).getname() == tabButtons2.get(i).getHint()){
-                                listfirst.get(j).getblock();
+                                listfirst.get(j).addblock();
                                 Log.i(listfirst.get(j).getname(), String.valueOf(listfirst.get(j).getblock()));
                                 final int finalJ = j;
                                 final int temp0 = listfirst.get(j).getblock();
@@ -1028,7 +1028,7 @@ public class TrackGameActivity extends AppCompatActivity {
 
                         for (int k = 0; k < listsecond.size(); k++){
                             if(listsecond.get(k).getname() == tabButtons2.get(i).getHint()){
-                                listsecond.get(k).getblock();
+                                listsecond.get(k).addblock();
                                 Log.i(listsecond.get(k).getname(), String.valueOf(listsecond.get(k).getblock()));
                                 final int finalK = k;
                                 final int temp0 = listsecond.get(k).getblock();

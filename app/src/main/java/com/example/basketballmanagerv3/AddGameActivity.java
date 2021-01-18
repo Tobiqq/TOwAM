@@ -37,7 +37,7 @@ public class AddGameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_gane_activity);
+        setContentView(R.layout.add_game_activity);
         this.setTitle("Add Game");
 
         Savebutton = findViewById(R.id.Savebutton);
@@ -64,6 +64,7 @@ public class AddGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 list.clear();
+                list.add("--Choose Team--");
                 for (int i = 0; i <= 3; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
@@ -99,6 +100,7 @@ public class AddGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 list.clear();
+                list.add("--Choose Team--");
                 for (int i = 0; i <= 3; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
@@ -135,6 +137,7 @@ public class AddGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 list.clear();
+                list.add("--Choose Team--");
                 for (int i = 0; i <= 3; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
@@ -171,6 +174,7 @@ public class AddGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 list.clear();
+                list.add("--Choose Team--");
                 for (int i = 0; i <= 3; i++){
                     tabButtons2.get(i).setSelected(false);
                     tabButtons2.get(i).setTextColor(Color.BLACK);
